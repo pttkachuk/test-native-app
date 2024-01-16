@@ -11,8 +11,6 @@ const ReportScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Report Screen</Text>
-      {/* <Text>UserID: {userID}</Text> */}
-      {/* <Button title="Torna indietro" onPress={() => navigation.goBack()} /> */}
     </View>
   );
 };
@@ -22,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
 });
 
