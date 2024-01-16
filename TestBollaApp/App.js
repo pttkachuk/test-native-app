@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,29 +8,33 @@ import HomeScreen from './Screens/HomeScreen';
 import CameraScreen from './Screens/CameraScreen';
 import ReportScreen from './Screens/ReportScreen';
 import InitialScreen from './Screens/InitialScreen';
+import { useFonts } from 'expo-font';
 
 const MainStack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Fira-Sans-Regular': require('./assets/fonts/Fira_Sans/FiraSans-Regular.ttf'),
+    'Fira-Sans-Medium': require('./assets/fonts/Fira_Sans/FiraSans-Medium.ttf'),
+    'Fira-Sans-Light': require('./assets/fonts/Fira_Sans/FiraSans-Light.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  };
   return (
     <NavigationContainer>
       <MainStack.Navigator initialRouteName='Home'>
         <MainStack.Screen name='Home' component={HomeScreen} options={{
-          title: 'Pagina principale', headerTitleAlign: 'center', headerStyle: {
-            backgroundColor: '#073C85',
-          }, headerTintColor: '#fff', headerShown: false,
+          headerShown: false,
         }} />
         <MainStack.Screen name='Report' component={ReportScreen} options={{
-          headerTitleAlign: 'center', headerStyle: {
-            backgroundColor: '#073C85',
-          }, headerTintColor: '#fff'
+          headerShown: false,
         }} />
         <MainStack.Screen name='Camera' component={CameraScreen} options={{
-          headerTitleAlign: 'center', headerStyle: {
-            backgroundColor: '#073C85',
-          }, headerTintColor: '#fff'
+          headerShown: false,
         }} />
-        <MainStack.Screen name='Main' component={InitialScreen} options={{}} />
+        <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
       </MainStack.Navigator>
 
     </NavigationContainer>
