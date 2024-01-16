@@ -4,9 +4,11 @@ import { Button, StyleSheet, Text, View } from "react-native";
 
 const CameraScreen = () => {
   const navigation = useNavigation();
+  //console.log("i am here at camera screen");
   return (
     <View style={styles.container}>
       <Text>Camera Screen</Text>
+
       {/* <Button title="Torna indietro" onPress={() => navigation.goBack()} /> */}
     </View>
   );
