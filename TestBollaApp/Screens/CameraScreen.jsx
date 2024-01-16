@@ -1,10 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 const CameraScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text>Camera Screen</Text>
+      {/* <Button title="Torna indietro" onPress={() => navigation.goBack()} /> */}
     </View>
   );
 };
