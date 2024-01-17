@@ -10,6 +10,7 @@ const ReportScreen = () => {
   //console.log("i am here at report screen");
   return (
     <View style={styles.container}>
+      <View style={styles.cameraContainer}></View>
       <Text>Report Screen</Text>
     </View>
   );
@@ -18,9 +19,16 @@ const ReportScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 15,
+    //alignItems: "center",
+    //justifyContent: "center",
     backgroundColor: "#fff",
+  },
+  cameraContainer: {
+    width: "100%",
+    height: "45%",
+    backgroundColor: "#A9A9A9",
+    borderRadius: 15,
   },
 });
 

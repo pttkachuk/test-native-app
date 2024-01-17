@@ -42,28 +42,14 @@ const HomeScreen = () => {
           tabBarShowLabel: false,
           tabBarStyle: {
             width: "100%",
-            height: 80,
-            paddingHorizontal: 70,
+            height: 60,
+            paddingHorizontal: 50,
             borderTopColor: "#A9A9A9",
             backgroundColor: "#fff",
           },
         })}
         initialRouteName="Main"
       >
-        <Tabs.Screen
-          name="Report"
-          component={ReportScreen}
-          options={{
-            headerTitle: "Dati da inserire",
-            headerTitleAlign: "center",
-            headerTitleStyle: {
-              fontFamily: "Fira-Sans-Light",
-              fontSize: 14,
-              color: "#fff",
-            },
-            headerStyle: { backgroundColor: "#073C85" },
-          }}
-        />
         <Tabs.Screen
           name="Main"
           component={InitialScreen}
@@ -79,12 +65,26 @@ const HomeScreen = () => {
           }}
         />
         <Tabs.Screen
+          name="Report"
+          component={ReportScreen}
+          options={{
+            headerTitle: "Dati da inserire",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "Fira-Sans-Light",
+              fontSize: 14,
+              color: "#fff",
+            },
+            headerStyle: { backgroundColor: "#073C85" },
+          }}
+        />
+        {/* <Tabs.Screen
           name="Camera"
           component={CameraScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
       </Tabs.Navigator>
     </View>
   );

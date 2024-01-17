@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   addPhotoBtn: {
-    marginTop: "50%",
+    marginTop: "45%",
     marginBottom: "15%",
     width: 180,
     height: 180,
