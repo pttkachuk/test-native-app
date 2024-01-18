@@ -29,12 +29,6 @@ const ReportScreen = () => {
   const route = useRoute();
   //console.log(route.params.photo);
 
-  //console.log(photo);
-
-  // const {
-  //   params: { userID },
-  // } = useRoute();
-  //console.log("i am here at report screen");
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
