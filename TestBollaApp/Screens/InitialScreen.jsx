@@ -6,7 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 const InitialScreen = () => {
   const navigation = useNavigation();
   const toCamera = () => {
-    navigation.navigate("Camera");
+    //navigation.navigate("Camera");
     console.log("to Camera");
   };
   return (
