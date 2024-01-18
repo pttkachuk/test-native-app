@@ -1,18 +1,22 @@
-//import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import { Camera, CameraType } from "expo-camera";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+//import { useWindowDimensions } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
-//import { MaterialIcons } from "@expo/vector-icons";
 import Button from "../src/components/Button";
 
 const CameraScreen = () => {
+  const navigation = useNavigation();
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [type, setType] = useState(CameraType.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
+
+  //const { width } = useWindowDimensions();
+  //const height = Math.round((width * 16) / 9);
 
   useEffect(() => {
     (async () => {
@@ -38,8 +42,9 @@ const CameraScreen = () => {
     if (image) {
       try {
         const asset = await MediaLibrary.createAssetAsync(image);
-        alert("Picture saved!");
+        //alert("Picture saved!");
         setImage(null);
+        navigation.navigate("Report", { photo: { image } });
         console.log("saved successfully");
       } catch (error) {
         console.log(error);
@@ -65,6 +70,11 @@ const CameraScreen = () => {
     );
   };
 
+  const goBack = () => {
+    navigation.goBack();
+    console.log("sono tornato alla homepage");
+  };
+
   return (
     <View style={styles.container}>
       {!image ? (
@@ -73,6 +83,7 @@ const CameraScreen = () => {
           type={type}
           ref={cameraRef}
           flashMode={flash}
+          ratio="16:9"
         >
           <View
             style={{
@@ -81,12 +92,13 @@ const CameraScreen = () => {
               paddingHorizontal: 30,
             }}
           >
-            <Button title="" icon="retweet" onPress={toggleCameratype} />
+            <Button title="Annulla" onPress={goBack} />
             <Button
               icon="flash"
               color={flash === Camera.Constants.FlashMode.off ? "gray" : "#fff"}
               onPress={toggleFlashMode}
             />
+            <Button icon="retweet" onPress={toggleCameratype} />
           </View>
         </Camera>
       ) : (
@@ -102,14 +114,14 @@ const CameraScreen = () => {
             }}
           >
             <Button
-              title="Re-take"
+              title="Rifare"
               onPress={() => setImage(null)}
               icon="retweet"
             />
-            <Button title="Save" onPress={savePicture} icon="check" />
+            <Button title="Salva" onPress={savePicture} icon="check" />
           </View>
         ) : (
-          <Button title="Take a picture" onPress={takePicture} icon="camera" />
+          <Button title="Scatta la foto" onPress={takePicture} icon="camera" />
         )}
       </View>
     </View>
