@@ -2,26 +2,15 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreen";
-import CameraScreen from "./CameraScreen";
+//import CameraScreen from "./CameraScreen";
 import InitialScreen from "./InitialScreen";
 
+const { width, height } = Dimensions.get("window");
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
-  //const navigation = useNavigation();
-
-  const logOutBtn = () => {
-    <TouchableOpacity
-      style={{ paddingRight: 20 }}
-      activeOpacity={0.5}
-      onPress={console.log("logOut button was pressed")}
-    >
-      <Feather name="log-out" size={24} color="#fff" />
-    </TouchableOpacity>;
-  };
-
   return (
     <View style={styles.container}>
       <Tabs.Navigator
@@ -41,12 +30,16 @@ const HomeScreen = () => {
           tabBarInactiveTintColor: "#A9A9A9",
           tabBarShowLabel: false,
           tabBarStyle: {
+            //position: "absolute",
             width: "100%",
-            height: 60,
+            height: height,
+            height: 50,
             paddingHorizontal: 50,
             borderTopColor: "#A9A9A9",
             backgroundColor: "#fff",
           },
+          //keyboardHidesTabBar: true,
+          tabBarHideOnKeyboard: true,
         })}
         initialRouteName="Main"
       >
@@ -76,6 +69,7 @@ const HomeScreen = () => {
               color: "#fff",
             },
             headerStyle: { backgroundColor: "#073C85" },
+            //tabBarStyle: { display: "none" },
           }}
         />
         {/* <Tabs.Screen
