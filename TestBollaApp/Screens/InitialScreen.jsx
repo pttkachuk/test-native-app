@@ -6,8 +6,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 const InitialScreen = () => {
   const navigation = useNavigation();
   const toCamera = () => {
-    //navigation.navigate("Camera");
-    console.log("to Camera");
+    navigation.navigate("Report");
+    console.log("to Report");
   };
   return (
     <View style={styles.container}>
@@ -15,7 +15,7 @@ const InitialScreen = () => {
       <TouchableOpacity style={styles.addPhotoBtn} onPress={toCamera}>
         <MaterialIcons name="add" size={90} color="#fff" />
       </TouchableOpacity>
-      <Text style={styles.description}>Premi "Piu" per scattare la foto</Text>
+      <Text style={styles.description}>Premi "Piu" per aggiungere i dati</Text>
     </View>
   );
 };
