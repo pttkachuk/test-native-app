@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import { Camera, CameraType } from "expo-camera";
-//import { useWindowDimensions } from "react-native";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
 import Button from "../src/components/Button";
@@ -14,9 +13,6 @@ const CameraScreen = () => {
   const [type, setType] = useState(CameraType.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
-
-  //const { width } = useWindowDimensions();
-  //const height = Math.round((width * 16) / 9);
 
   useEffect(() => {
     (async () => {
