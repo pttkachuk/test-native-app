@@ -40,9 +40,14 @@ const ReportScreen = () => {
     setModalVisible(true);
   };
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   //===============================================
 
   const pickImage = async () => {
+    closeModal();
     try {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -63,6 +68,7 @@ const ReportScreen = () => {
   };
 
   const makeImage = async () => {
+    closeModal();
     try {
       await ImagePicker.requestCameraPermissionsAsync();
       let result = await ImagePicker.launchCameraAsync({
@@ -139,6 +145,8 @@ const ReportScreen = () => {
           visibleFunc={modalVisible}
           requestFunc={requestClose}
           pressFunc={toggleModal}
+          cameraFunc={makeImage}
+          galleryFunc={pickImage}
         />
         <View style={styles.container}>
           {image ? (
@@ -146,7 +154,7 @@ const ReportScreen = () => {
               <Image source={{ uri: image }} style={styles.photo} />
             </View>
           ) : (
-            <TouchableOpacity style={styles.photoContainer} onPress={makeImage}>
+            <TouchableOpacity style={styles.photoContainer} onPress={openModal}>
               <MaterialIcons name="add" size={80} color="#fff" />
               <Text
                 style={{

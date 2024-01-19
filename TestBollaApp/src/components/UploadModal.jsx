@@ -22,10 +22,16 @@ const UploadModal = (props) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <TouchableOpacity style={[styles.button, styles.buttonClose]}>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonClose]}
+            onPress={props.cameraFunc}
+          >
             <Ionicons name="camera-outline" size={35} color="#073C85" />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.buttonClose]}>
+          <TouchableOpacity
+            style={[styles.button, styles.buttonClose]}
+            onPress={props.galleryFunc}
+          >
             <Ionicons name="image-sharp" size={35} color="#008000" />
           </TouchableOpacity>
           <TouchableOpacity
