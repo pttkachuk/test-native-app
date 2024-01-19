@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import * as MailComposer from "expo-mail-composer";
 import React, { useState } from "react";
 import {
   Alert,
@@ -18,97 +19,163 @@ import {
 
 const ReportScreen = () => {
   const navigation = useNavigation();
-  const [statusCamera, requestCameraPermission] =
-    ImagePicker.useCameraPermissions();
-  const [statusMedia, requestMediaPernmssion] =
-    ImagePicker.useCameraPermissions();
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
   const [code, setCode] = useState("");
   const [image, setImage] = useState("");
 
+  //===============================================
+
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      //aspect: [1, 1],
-      quality: 1,
-    });
+    try {
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        //aspect: [1, 1],
+        quality: 1,
+      });
 
-    //console.log(result);
+      //console.log(result);
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  const makeImage = async () => {
+    try {
+      await ImagePicker.requestCameraPermissionsAsync();
+      let result = await ImagePicker.launchCameraAsync({
+        cameraType: ImagePicker.CameraType.back,
+        allowsEditing: true,
+        quality: 1,
+      });
+
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //===============================================
 
   const clearReport = () => {
     setCode("");
     setImage("");
   };
 
-  const sendMail = () => {
-    Alert.alert(
-      "Dati da mandare via mail:",
-      `FOTO:${image} + CODICE FATTURATO:${code}`
-    );
-    console.log(
-      "Dati da mandare via mail:",
-      `FOTO:${image} + CODICE FATTURATO:${code}`
-    );
+  //===============================================
+
+  // const sendMail = () => {
+  //   if (!image && !code) {
+  //     Alert.alert("Dati non inseriti!");
+  //   } else {
+  //     Alert.alert(
+  //       "Dati da mandare via mail:",
+  //       `FOTO:${image} + CODICE FATTURATO:${code}`
+  //     );
+  //   }
+  //   console.log(
+  //     "Dati da mandare via mail:",
+  //     `FOTO:${image} + CODICE DELLA COMMESSA:${code}`
+  //   );
+  //   clearReport();
+  // };
+
+  const sendMail = async () => {
+    try {
+      const mailBody = `Buongiorno. Invio la bolla con numero di commessa: ${code}`;
+      await MailComposer.composeAsync({
+        recipients: ["petrotkachuk6@gmail.com"],
+        subject: "Documento di trasporto",
+        body: mailBody,
+        attachments: [image],
+      });
+    } catch (error) {
+      console.error("Error nell'invio dell'e-mail", error);
+      Alert.alert(
+        "Errore",
+        "Si è verificato un error durante l'invio dell'e-mail"
+      );
+    }
     clearReport();
   };
 
-  const toCamera = () => {
-    console.log("to camera");
+  const goHome = () => {
+    navigation.navigate("Main");
+    clearReport();
+    //console.log("btn goHome", `Photo:${image} + Code:${code}`);
   };
-
-  //const route = useRoute();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        {image ? (
-          <View style={styles.photoContainer}>
-            <Image source={{ uri: image }} style={styles.photo} />
-          </View>
-        ) : (
-          <TouchableOpacity style={styles.photoContainer} onPress={pickImage}>
-            <MaterialIcons name="add" size={80} color="#fff" />
-            <Text
-              style={{
-                marginTop: 5,
-                fontFamily: "Fira-Sans-Regular",
-                fontSize: 12,
-                color: "#fff",
-              }}
-            >
-              Aggiungi la foto
-            </Text>
-          </TouchableOpacity>
-        )}
-        {/* <View style={styles.photoContainer}></View> */}
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "android" ? "height" : "padding"}
-          style={{ flex: 1 }}
-        >
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "android" ? "height" : "padding"}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.container}>
+          {image ? (
+            <View style={styles.photoInContainer}>
+              <Image source={{ uri: image }} style={styles.photo} />
+            </View>
+          ) : (
+            <TouchableOpacity style={styles.photoContainer} onPress={makeImage}>
+              <MaterialIcons name="add" size={80} color="#fff" />
+              <Text
+                style={{
+                  marginTop: 5,
+                  fontFamily: "Fira-Sans-Regular",
+                  fontSize: 12,
+                  color: "#fff",
+                }}
+              >
+                Aggiungi la foto
+              </Text>
+            </TouchableOpacity>
+          )}
           <TextInput
-            style={styles.textInput}
-            placeholder="Inserisci codice fatturato"
+            style={[
+              styles.textInput,
+              {
+                borderWidth: 1,
+                borderColor: isFocused ? "#073C85" : "#D3D3D3",
+              },
+            ]}
+            placeholder="Inserisci numero di commessa"
             value={code}
             onChangeText={(value) => setCode(value)}
-            onFocus={() => setIsKeyboardVisible(true)}
-            onBlur={() => setIsKeyboardVisible(false)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
-          <View style={styles.bottomBtns}>
-            <TouchableOpacity style={styles.btn} onPress={clearReport}>
-              <Text style={styles.btnText}>Elimina</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={sendMail}>
-              <Text style={styles.btnText}>Invia</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+          {!image && !code ? (
+            <View style={styles.exitBtnWrap}>
+              <Text style={styles.alertText}>
+                prima aggiungi i dati e dopo potrai inviarli
+              </Text>
+              <TouchableOpacity style={styles.exitBtn} onPress={goHome}>
+                <Text style={styles.exitBtnText}>
+                  Torna alla Pagina Principale
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.bottomBtns}>
+              <TouchableOpacity style={styles.btn} onPress={clearReport}>
+                <Text style={styles.btnText}>Elimina</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn} onPress={sendMail}>
+                <Text style={styles.btnText}>Invia</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
@@ -132,31 +199,46 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     overflow: "hidden",
   },
+  photoInContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: 300,
+    backgroundColor: "transparent",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#D3D3D3",
+    marginBottom: 15,
+    overflow: "hidden",
+  },
   textInput: {
     width: "100%",
     height: 50,
     fontFamily: "Fira-Sans-Light",
     paddingLeft: 15,
-    backgroundColor: "#A9A9A9",
+    backgroundColor: "transparent",
+    //borderWidth: 1,
+    //borderColor: [isFocused] ,
     borderRadius: 8,
   },
   photo: {
     width: "100%",
     height: "100%",
     borderRadius: 8,
+    objectFit: "contain",
   },
   bottomBtns: {
     display: "flex",
+    width: "100%",
     padding: 0,
-    marginTop: 15,
+    marginTop: "auto",
+    //marginBottom: 50,
     justifyContent: "space-between",
     flexDirection: "row",
     alignContent: "center",
     alignItems: "center",
-    width: "100%",
     height: 50,
-    //borderWidth: 1,
-    //borderColor: "black",
   },
   btn: {
     backgroundColor: "#073C85",
@@ -170,6 +252,35 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontFamily: "Fira-Sans-Regular",
     fontSize: 12,
+  },
+  exitBtnWrap: {
+    width: "100%",
+    height: 75,
+    padding: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "auto",
+    //borderWidth: 1,
+    //borderColor: "black",
+  },
+  exitBtn: {
+    width: "100%",
+    backgroundColor: "#073C85",
+    alignItems: "center",
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderRadius: 8,
+  },
+  exitBtnText: {
+    color: "#fff",
+    fontFamily: "Fira-Sans-Regular",
+    fontSize: 12,
+  },
+  alertText: {
+    color: "#D3D3D3",
+    fontFamily: "Fira-Sans-Light",
+    fontSize: 12,
+    marginBottom: 10,
   },
 });
 
