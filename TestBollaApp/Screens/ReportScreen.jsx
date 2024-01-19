@@ -185,8 +185,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     backgroundColor: "#fff",
-    //alignItems: "center",
-    //justifyContent: "center",
   },
   photoContainer: {
     display: "flex",
@@ -218,8 +216,6 @@ const styles = StyleSheet.create({
     fontFamily: "Fira-Sans-Light",
     paddingLeft: 15,
     backgroundColor: "transparent",
-    //borderWidth: 1,
-    //borderColor: [isFocused] ,
     borderRadius: 8,
   },
   photo: {
@@ -260,8 +256,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: "auto",
-    //borderWidth: 1,
-    //borderColor: "black",
   },
   exitBtn: {
     width: "100%",
