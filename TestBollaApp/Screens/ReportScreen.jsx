@@ -16,13 +16,29 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import UploadModal from "../src/components/UploadModal";
 
 const ReportScreen = () => {
   const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [code, setCode] = useState("");
   const [image, setImage] = useState("");
+
+  //===============================================
+  const requestClose = () => {
+    Alert.alert("Modal has been closed.");
+    setModalVisible(false);
+  };
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
 
   //===============================================
 
@@ -119,6 +135,11 @@ const ReportScreen = () => {
         behavior={Platform.OS == "android" ? "height" : "padding"}
         style={{ flex: 1 }}
       >
+        <UploadModal
+          visibleFunc={modalVisible}
+          requestFunc={requestClose}
+          pressFunc={toggleModal}
+        />
         <View style={styles.container}>
           {image ? (
             <View style={styles.photoInContainer}>
