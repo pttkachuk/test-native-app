@@ -1,13 +1,11 @@
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-//import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreen";
-//import CameraScreen from "./CameraScreen";
 import InitialScreen from "./InitialScreen";
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
@@ -30,7 +28,6 @@ const HomeScreen = () => {
           tabBarInactiveTintColor: "#A9A9A9",
           tabBarShowLabel: false,
           tabBarStyle: {
-            //position: "absolute",
             width: "100%",
             height: height,
             height: 50,
@@ -38,7 +35,6 @@ const HomeScreen = () => {
             borderTopColor: "#A9A9A9",
             backgroundColor: "#fff",
           },
-          //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         })}
         initialRouteName="Main"
@@ -69,16 +65,8 @@ const HomeScreen = () => {
               color: "#fff",
             },
             headerStyle: { backgroundColor: "#073C85" },
-            //tabBarStyle: { display: "none" },
           }}
         />
-        {/* <Tabs.Screen
-          name="Camera"
-          component={CameraScreen}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
       </Tabs.Navigator>
     </View>
   );
@@ -88,8 +76,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flex: 1,
-    //alignItems: "center",
-    //justifyContent: "center",
   },
 });
 
