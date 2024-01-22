@@ -105,7 +105,7 @@ const ReportScreen = () => {
 
   const sendMail = async () => {
     try {
-      const mailBody = `Buongiorno. Invio la bolla con numero di commessa: ${code}`;
+      const mailBody = `Buongiorno.\n\n Invio la bolla con numero di commessa: ${code}.\n\n`;
       await MailComposer.composeAsync({
         recipients: ["petrotkachuk6@gmail.com"],
         subject: "Documento di trasporto",
