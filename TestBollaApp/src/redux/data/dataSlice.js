@@ -5,15 +5,18 @@ const initialState = {
     image: '',
 };
 
+console.log(initialState.image);
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
     reducers: {
-        addPhoto(state, { payload }) {
-            state.image = payload.image;
+        addPhoto(state, actions) {
+            state.image = actions.payload;
+            //console.log('dataSlice image:', actions.payload);
         },
-        addCode(state, { payload }) {
-            state.code = payload.code;
+        addCode(state, actions) {
+            state.code = actions.payload;
         },
         clearData(state) {
             state.code = '';

@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dataReducer } from './data/dataSlice';
 
 const persistConfig = {
-    key: 'dati',
+    key: 'data',
     storage: AsyncStorage,
 };
 
@@ -33,4 +33,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-//export default { store, persistor };
