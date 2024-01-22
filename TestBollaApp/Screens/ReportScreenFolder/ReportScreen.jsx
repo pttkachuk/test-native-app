@@ -18,28 +18,22 @@ import {
 import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
 import { saveToGallery } from "../../src/helpers/SaveToGallery";
 import { styles } from "./ReportScreenStyles";
-
-//import { useDispatch, useSelector } from "react-redux";
-//import { selectCode, selectImage } from "../src/redux/data/dataSelectors";
-//import { addCode, addPhoto, clearData } from "../src/redux/data/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCode, addPhoto, clearData } from "../../src/redux/data/dataSlice";
+import { selectCode, selectImage } from "../../src/redux/data/dataSelectors";
 
 const ReportScreen = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  //const image = useSelector(selectImage);
-  //const code = useSelector(selectCode);
-  //console.log("reportScreen image:", image);
+  const image = useSelector(selectImage);
+  const code = useSelector(selectCode);
 
-  const [code, setCode] = useState("");
-  const [image, setImage] = useState("");
-
-  // const onChangeValue = (value) => {
-  //   dispatch(addCode({ code: value }));
-  //   console.log(value);
-  // };
+  const onChangeValue = (value) => {
+    dispatch(addCode(value));
+  };
 
   //===============================================
   const requestClose = () => {
@@ -64,8 +58,7 @@ const ReportScreen = () => {
       });
 
       if (!result.canceled) {
-        setImage(result.assets[0].uri);
-        //dispatch(addPhoto(result.assets[0].uri));
+        dispatch(addPhoto(result.assets[0].uri));
       }
     } catch (error) {
       console.log(error);
@@ -83,12 +76,11 @@ const ReportScreen = () => {
       });
 
       if (!result.canceled) {
-        setImage(result.assets[0].uri);
-        // try {
-        //   dispatch(addPhoto(result.assets[0].uri));
-        // } catch (error) {
-        //   console.log(error);
-        // }
+        try {
+          dispatch(addPhoto(result.assets[0].uri));
+        } catch (error) {
+          console.log(error);
+        }
         saveToGallery(result.assets[0].uri);
       }
     } catch (error) {
@@ -99,13 +91,8 @@ const ReportScreen = () => {
   //===============================================
 
   const clearReport = () => {
-    setCode("");
-    setImage("");
+    dispatch(clearData());
   };
-
-  // const clearReport = () => {
-  //   dispatch(clearData());
-  // };
 
   //===============================================
 
@@ -126,12 +113,12 @@ const ReportScreen = () => {
       );
     }
     clearReport();
+    navigation.navigate("Main");
   };
 
   const goHome = () => {
     navigation.navigate("Main");
     clearReport();
-    //console.log("btn goHome", `Photo:${image} + Code:${code}`);
   };
 
   return (
@@ -180,7 +167,7 @@ const ReportScreen = () => {
             ]}
             placeholder="Inserisci numero di commessa"
             value={code}
-            onChangeText={(value) => setCode(value)}
+            onChangeText={onChangeValue}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
           />
