@@ -18,14 +18,27 @@ import {
 } from "react-native";
 import UploadModal from "../src/components/UploadModal";
 import { saveToGallery } from "../src/helpers/SaveToGallery";
+// import { useDispatch, useSelector } from "react-redux";
+// import { selectCode, selectImage } from "../src/redux/data/dataSelectors";
+// import { addCode, clearData } from "../src/redux/data/dataSlice";
 
 const ReportScreen = () => {
+  //const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  //const image = useSelector(selectImage);
+  //const code = useSelector(selectCode);
+  //console.log(code);
+
   const [code, setCode] = useState("");
   const [image, setImage] = useState("");
+
+  // const onChangeValue = (value) => {
+  //   dispatch(addCode((prevState) => ({ ...prevState, value })));
+  //   console.log(value);
+  // };
 
   //===============================================
   const requestClose = () => {
