@@ -17,6 +17,7 @@ import {
   View,
 } from "react-native";
 import UploadModal from "../src/components/UploadModal";
+import { saveToGallery } from "../src/helpers/SaveToGallery";
 
 const ReportScreen = () => {
   const navigation = useNavigation();
@@ -36,28 +37,17 @@ const ReportScreen = () => {
     setModalVisible(!modalVisible);
   };
 
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
   //===============================================
 
   const pickImage = async () => {
-    closeModal();
+    toggleModal();
     try {
       await ImagePicker.requestMediaLibraryPermissionsAsync();
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
-        //aspect: [1, 1],
-        quality: 1,
+        quality: 0.5,
       });
-
-      //console.log(result);
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
@@ -68,17 +58,18 @@ const ReportScreen = () => {
   };
 
   const makeImage = async () => {
-    closeModal();
+    toggleModal();
     try {
       await ImagePicker.requestCameraPermissionsAsync();
       let result = await ImagePicker.launchCameraAsync({
         cameraType: ImagePicker.CameraType.back,
         allowsEditing: true,
-        quality: 1,
+        quality: 0.5,
       });
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
+        saveToGallery(result.assets[0].uri);
       }
     } catch (error) {
       console.log(error);
@@ -93,22 +84,6 @@ const ReportScreen = () => {
   };
 
   //===============================================
-
-  // const sendMail = () => {
-  //   if (!image && !code) {
-  //     Alert.alert("Dati non inseriti!");
-  //   } else {
-  //     Alert.alert(
-  //       "Dati da mandare via mail:",
-  //       `FOTO:${image} + CODICE FATTURATO:${code}`
-  //     );
-  //   }
-  //   console.log(
-  //     "Dati da mandare via mail:",
-  //     `FOTO:${image} + CODICE DELLA COMMESSA:${code}`
-  //   );
-  //   clearReport();
-  // };
 
   const sendMail = async () => {
     try {
@@ -154,7 +129,10 @@ const ReportScreen = () => {
               <Image source={{ uri: image }} style={styles.photo} />
             </View>
           ) : (
-            <TouchableOpacity style={styles.photoContainer} onPress={openModal}>
+            <TouchableOpacity
+              style={styles.photoContainer}
+              onPress={toggleModal}
+            >
               <MaterialIcons name="add" size={80} color="#fff" />
               <Text
                 style={{
@@ -258,7 +236,6 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 0,
     marginTop: "auto",
-    //marginBottom: 50,
     justifyContent: "space-between",
     flexDirection: "row",
     alignContent: "center",
