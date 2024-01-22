@@ -18,9 +18,9 @@ import {
 } from "react-native";
 import UploadModal from "../src/components/UploadModal";
 import { saveToGallery } from "../src/helpers/SaveToGallery";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectCode, selectImage } from "../src/redux/data/dataSelectors";
-// import { addCode, clearData } from "../src/redux/data/dataSlice";
+//import { useDispatch, useSelector } from "react-redux";
+//import { selectCode, selectImage } from "../src/redux/data/dataSelectors";
+//mport { addCode, clearData } from "../src/redux/data/dataSlice";
 
 const ReportScreen = () => {
   //const dispatch = useDispatch();
@@ -35,8 +35,9 @@ const ReportScreen = () => {
   const [code, setCode] = useState("");
   const [image, setImage] = useState("");
 
-  // const onChangeValue = (value) => {
-  //   dispatch(addCode((prevState) => ({ ...prevState, value })));
+  // const onChangeValue = (e) => {
+  //   const value = e.target.value;
+  //   dispatch(addCode({ code: value }));
   //   console.log(value);
   // };
 
@@ -95,6 +96,10 @@ const ReportScreen = () => {
     setCode("");
     setImage("");
   };
+
+  // const clearReport = () => {
+  //   dispatch(clearData());
+  // };
 
   //===============================================
 
