@@ -1,14 +1,6 @@
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const UploadModal = (props) => {
   //const [modalVisible, setModalVisible] = useState(false);
@@ -23,28 +15,19 @@ const UploadModal = (props) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.btnbox}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={props.cameraFunc}
-            >
+            <TouchableOpacity style={styles.button} onPress={props.cameraFunc}>
               <Ionicons name="camera-outline" size={35} color="#073C85" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Camera</Text>
           </View>
           <View style={styles.btnbox}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={props.galleryFunc}
-            >
+            <TouchableOpacity style={styles.button} onPress={props.galleryFunc}>
               <Ionicons name="image-sharp" size={35} color="#008000" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Foto</Text>
           </View>
           <View style={styles.btnbox}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={props.pressFunc}
-            >
+            <TouchableOpacity style={styles.button} onPress={props.pressFunc}>
               <Ionicons name="close-outline" size={35} color="#D22B2B" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Annulla</Text>
@@ -60,7 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //marginTop: 22,
   },
   modalView: {
     display: "flex",
@@ -74,7 +56,6 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingLeft: 30,
     paddingRight: 30,
-    //padding: 50,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -85,14 +66,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 15,
     elevation: 3,
-    //borderWidth: 0.5,
-    //borderColor: "#073C85",
-  },
-  buttonClose: {
-    backgroundColor: "#fff",
   },
   textStyle: {
     color: "#fff",
