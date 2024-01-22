@@ -15,7 +15,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import UploadModal from "../../src/components/UploadModal";
+import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
 import { saveToGallery } from "../../src/helpers/SaveToGallery";
 import { styles } from "./ReportScreenStyles";
 

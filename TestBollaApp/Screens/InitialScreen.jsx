@@ -2,7 +2,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import UploadModal from "../src/components/UploadModal";
+import UploadModal from "../src/components/UploadModalFolder/UploadModal";
 
 const InitialScreen = () => {
   const navigation = useNavigation();
