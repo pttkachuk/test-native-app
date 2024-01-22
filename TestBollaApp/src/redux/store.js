@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dataReducer } from './data/dataSlice';
+import { modalReducer } from './modal/modalSlice';
 
 const persistConfig = {
     key: 'data',
@@ -22,6 +23,7 @@ const persistDataReducer = persistReducer(persistConfig, dataReducer);
 export const store = configureStore({
     reducer: {
         data: persistDataReducer,
+        modal: modalReducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
