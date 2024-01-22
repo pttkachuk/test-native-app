@@ -9,18 +9,19 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import UploadModal from "../src/components/UploadModal";
-import { saveToGallery } from "../src/helpers/SaveToGallery";
+import UploadModal from "../../src/components/UploadModal";
+import { saveToGallery } from "../../src/helpers/SaveToGallery";
+import { styles } from "./ReportScreenStyles";
+
 //import { useDispatch, useSelector } from "react-redux";
 //import { selectCode, selectImage } from "../src/redux/data/dataSelectors";
-//mport { addCode, clearData } from "../src/redux/data/dataSlice";
+//import { addCode, addPhoto, clearData } from "../src/redux/data/dataSlice";
 
 const ReportScreen = () => {
   //const dispatch = useDispatch();
@@ -30,13 +31,12 @@ const ReportScreen = () => {
 
   //const image = useSelector(selectImage);
   //const code = useSelector(selectCode);
-  //console.log(code);
+  //console.log("reportScreen image:", image);
 
   const [code, setCode] = useState("");
   const [image, setImage] = useState("");
 
-  // const onChangeValue = (e) => {
-  //   const value = e.target.value;
+  // const onChangeValue = (value) => {
   //   dispatch(addCode({ code: value }));
   //   console.log(value);
   // };
@@ -65,6 +65,7 @@ const ReportScreen = () => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
+        //dispatch(addPhoto(result.assets[0].uri));
       }
     } catch (error) {
       console.log(error);
@@ -83,6 +84,11 @@ const ReportScreen = () => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
+        // try {
+        //   dispatch(addPhoto(result.assets[0].uri));
+        // } catch (error) {
+        //   console.log(error);
+        // }
         saveToGallery(result.assets[0].uri);
       }
     } catch (error) {
@@ -204,102 +210,5 @@ const ReportScreen = () => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 15,
-    backgroundColor: "#fff",
-  },
-  photoContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: 300,
-    backgroundColor: "#073C85",
-    borderRadius: 8,
-    marginBottom: 15,
-    overflow: "hidden",
-  },
-  photoInContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: 300,
-    backgroundColor: "transparent",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#D3D3D3",
-    marginBottom: 15,
-    overflow: "hidden",
-  },
-  textInput: {
-    width: "100%",
-    height: 50,
-    fontFamily: "Fira-Sans-Light",
-    paddingLeft: 15,
-    backgroundColor: "transparent",
-    borderRadius: 8,
-  },
-  photo: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 8,
-    objectFit: "contain",
-  },
-  bottomBtns: {
-    display: "flex",
-    width: "100%",
-    padding: 0,
-    marginTop: "auto",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignContent: "center",
-    alignItems: "center",
-    height: 50,
-  },
-  btn: {
-    backgroundColor: "#073C85",
-    paddingRight: 60,
-    paddingLeft: 60,
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderRadius: 8,
-  },
-  btnText: {
-    color: "#fff",
-    fontFamily: "Fira-Sans-Regular",
-    fontSize: 12,
-  },
-  exitBtnWrap: {
-    width: "100%",
-    height: 75,
-    padding: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "auto",
-  },
-  exitBtn: {
-    width: "100%",
-    backgroundColor: "#073C85",
-    alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 15,
-    borderRadius: 8,
-  },
-  exitBtnText: {
-    color: "#fff",
-    fontFamily: "Fira-Sans-Regular",
-    fontSize: 12,
-  },
-  alertText: {
-    color: "#D3D3D3",
-    fontFamily: "Fira-Sans-Light",
-    fontSize: 12,
-    marginBottom: 10,
-  },
-});
 
 export default ReportScreen;

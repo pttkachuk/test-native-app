@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import ReportScreen from "./ReportScreen";
+import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
 
 const { height } = Dimensions.get("window");

@@ -6,7 +6,7 @@ import 'react-native-gesture-handler';
 
 import HomeScreen from './Screens/HomeScreen';
 //import CameraScreen from './Screens/CameraScreen';
-import ReportScreen from './Screens/ReportScreen';
+import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
 import InitialScreen from './Screens/InitialScreen';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
