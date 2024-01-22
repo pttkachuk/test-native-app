@@ -1,11 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./UploadModalStyles";
 
 const UploadModal = (props) => {
-  //const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <Modal
       animationType="fade"

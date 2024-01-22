@@ -18,10 +18,6 @@ const InitialScreen = () => {
     setModalVisible(!modalVisible);
   };
 
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
   const toCamera = () => {
     navigation.navigate("Report");
   };
@@ -33,7 +29,7 @@ const InitialScreen = () => {
         pressFunc={toggleModal}
       />
       <Text style={styles.userName}>Nome Cognome</Text>
-      <TouchableOpacity style={styles.addPhotoBtn} onPress={openModal}>
+      <TouchableOpacity style={styles.addPhotoBtn} onPress={toggleModal}>
         <MaterialIcons name="add" size={90} color="#fff" />
       </TouchableOpacity>
       <Text style={styles.description}>Premi "Piu" per aggiungere i dati</Text>
