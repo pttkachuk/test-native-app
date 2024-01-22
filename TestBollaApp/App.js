@@ -9,6 +9,9 @@ import HomeScreen from './Screens/HomeScreen';
 import ReportScreen from './Screens/ReportScreen';
 import InitialScreen from './Screens/InitialScreen';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './src/redux/store';
 
 const MainStack = createStackNavigator();
 
@@ -23,21 +26,26 @@ export default function App() {
     return null;
   };
   return (
-    <NavigationContainer>
-      <MainStack.Navigator initialRouteName='Home'>
-        <MainStack.Screen name='Home' component={HomeScreen} options={{
-          headerShown: false,
-        }} />
-        <MainStack.Screen name='Report' component={ReportScreen} options={{
-          headerShown: false,
-        }} />
-        {/* <MainStack.Screen name='Camera' component={CameraScreen} options={{
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <MainStack.Navigator initialRouteName='Home'>
+            <MainStack.Screen name='Home' component={HomeScreen} options={{
+              headerShown: false,
+            }} />
+            <MainStack.Screen name='Report' component={ReportScreen} options={{
+              headerShown: false,
+            }} />
+            {/* <MainStack.Screen name='Camera' component={CameraScreen} options={{
           headerShown: false,
         }} /> */}
-        <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
-      </MainStack.Navigator>
+            <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
+          </MainStack.Navigator>
 
-    </NavigationContainer>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
+
   );
 }
 
