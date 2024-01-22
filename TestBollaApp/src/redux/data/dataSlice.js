@@ -13,7 +13,6 @@ export const dataSlice = createSlice({
     reducers: {
         addPhoto(state, actions) {
             state.image = actions.payload;
-            //console.log('dataSlice image:', actions.payload);
         },
         addCode(state, actions) {
             state.code = actions.payload;
