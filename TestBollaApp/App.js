@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
 import HomeScreen from './Screens/HomeScreen';
-//import CameraScreen from './Screens/CameraScreen';
 import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
 import InitialScreen from './Screens/InitialScreen';
 import { useFonts } from 'expo-font';
@@ -36,9 +35,6 @@ export default function App() {
             <MainStack.Screen name='Report' component={ReportScreen} options={{
               headerShown: false,
             }} />
-            {/* <MainStack.Screen name='Camera' component={CameraScreen} options={{
-          headerShown: false,
-        }} /> */}
             <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
           </MainStack.Navigator>
           <StatusBar style='light' />
