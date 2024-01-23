@@ -7,9 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectModalVisible } from "../../redux/modal/modalSelectors";
 import { requestClose, toggleModalVisible } from "../../redux/modal/modalSlice";
 import { addPhoto } from "../../redux/data/dataSlice";
+import { saveToGallery } from "../../helpers/SaveToGallery";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const UploadModal = () => {
   const dispatch = useDispatch();
+  const route = useRoute();
+  const navigation = useNavigation();
   const modalVisible = useSelector(selectModalVisible);
 
   const requestCloseFunc = () => {
@@ -39,6 +43,9 @@ const UploadModal = () => {
     } catch (error) {
       console.log(error);
     }
+    if (route.name === "Main") {
+      navigation.navigate("Report");
+    }
   };
 
   const makeImage = async () => {
@@ -54,13 +61,16 @@ const UploadModal = () => {
       if (!result.canceled) {
         try {
           dispatch(addPhoto(result.assets[0].uri));
+          saveToGallery(result.assets[0].uri);
         } catch (error) {
           console.log(error);
         }
-        saveToGallery(result.assets[0].uri);
       }
     } catch (error) {
       console.log(error);
+    }
+    if (route.name === "Main") {
+      navigation.navigate("Report");
     }
   };
 
