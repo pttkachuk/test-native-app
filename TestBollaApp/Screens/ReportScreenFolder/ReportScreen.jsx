@@ -113,7 +113,7 @@ const ReportScreen = () => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
           />
-          {!image && !code ? (
+          {!image || !code ? (
             <View style={styles.exitBtnWrap}>
               <Text style={styles.alertText}>
                 prima aggiungi i dati e dopo potrai inviarli
