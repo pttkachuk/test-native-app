@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#073C85",
     justifyContent: "center",
     alignItems: "center",
-    elevation: 35,
+    elevation: 50,
   },
   description: {
     fontFamily: "Fira-Sans-Light",
