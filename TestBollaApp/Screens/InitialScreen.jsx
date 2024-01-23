@@ -19,7 +19,9 @@ const InitialScreen = () => {
       <TouchableOpacity style={styles.addPhotoBtn} onPress={toggleModal}>
         <MaterialIcons name="add" size={90} color="#fff" />
       </TouchableOpacity>
-      <Text style={styles.description}>Premi "Piu" per aggiungere la foto</Text>
+      <Text style={styles.description}>
+        Premi "Piu" per aggiungere la foto del documento
+      </Text>
     </View>
   );
 };
