@@ -8,7 +8,7 @@ export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        toggleModal(state) {
+        toggleModalVisible(state) {
             state.modalVisible = !state.modalVisible;
         },
         requestClose(state) {
@@ -17,5 +17,5 @@ export const modalSlice = createSlice({
     }
 });
 
-export const { toggleModal, requestClose } = modalSlice.actions;
+export const { toggleModalVisible, requestClose } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;
