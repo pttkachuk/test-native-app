@@ -8,13 +8,18 @@ import { selectModalVisible } from "../../redux/modal/modalSelectors";
 import { requestClose, toggleModalVisible } from "../../redux/modal/modalSlice";
 import { addPhoto } from "../../redux/data/dataSlice";
 import { saveToGallery } from "../../helpers/SaveToGallery";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 
 const UploadModal = () => {
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
   const modalVisible = useSelector(selectModalVisible);
+  const isFocused = useIsFocused();
 
   const requestCloseFunc = () => {
     Alert.alert("Modal has been closed.");
@@ -39,12 +44,12 @@ const UploadModal = () => {
 
       if (!result.canceled) {
         dispatch(addPhoto(result.assets[0].uri));
+        if (!isFocused) {
+          navigation.navigate("Report");
+        }
       }
     } catch (error) {
       console.log(error);
-    }
-    if (route.name === "Main") {
-      navigation.navigate("Report");
     }
   };
 
@@ -62,15 +67,15 @@ const UploadModal = () => {
         try {
           dispatch(addPhoto(result.assets[0].uri));
           saveToGallery(result.assets[0].uri);
+          if (!isFocused) {
+            navigation.navigate("Report");
+          }
         } catch (error) {
           console.log(error);
         }
       }
     } catch (error) {
       console.log(error);
-    }
-    if (route.name === "Main") {
-      navigation.navigate("Report");
     }
   };
 
