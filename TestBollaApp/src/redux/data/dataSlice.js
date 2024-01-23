@@ -5,8 +5,6 @@ const initialState = {
     image: '',
 };
 
-console.log(initialState.image);
-
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
