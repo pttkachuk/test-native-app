@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+//import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import UploadModal from "../src/components/UploadModalFolder/UploadModal";
@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { toggleModalVisible } from "../src/redux/modal/modalSlice";
 
 const InitialScreen = () => {
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const toggleModal = () => {
