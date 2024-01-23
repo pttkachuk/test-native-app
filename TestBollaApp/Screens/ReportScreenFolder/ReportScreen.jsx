@@ -1,6 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker";
 import * as MailComposer from "expo-mail-composer";
 import React, { useState } from "react";
 import {
@@ -16,84 +15,38 @@ import {
   View,
 } from "react-native";
 import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
-import { saveToGallery } from "../../src/helpers/SaveToGallery";
 import { styles } from "./ReportScreenStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addCode, addPhoto, clearData } from "../../src/redux/data/dataSlice";
+import { addCode, clearData } from "../../src/redux/data/dataSlice";
 import { selectCode, selectImage } from "../../src/redux/data/dataSelectors";
+import { toggleModalVisible } from "../../src/redux/modal/modalSlice";
 
 const ReportScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const [isFocused, setIsFocused] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const image = useSelector(selectImage);
   const code = useSelector(selectCode);
 
+  //===============================================
   const onChangeValue = (value) => {
     dispatch(addCode(value));
   };
 
-  //===============================================
-  const requestClose = () => {
-    Alert.alert("Modal has been closed.");
-    setModalVisible(false);
-  };
-
   const toggleModal = () => {
-    setModalVisible(!modalVisible);
+    dispatch(toggleModalVisible());
   };
-
-  //===============================================
-
-  const pickImage = async () => {
-    toggleModal();
-    try {
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        quality: 0.5,
-      });
-
-      if (!result.canceled) {
-        dispatch(addPhoto(result.assets[0].uri));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const makeImage = async () => {
-    toggleModal();
-    try {
-      await ImagePicker.requestCameraPermissionsAsync();
-      let result = await ImagePicker.launchCameraAsync({
-        cameraType: ImagePicker.CameraType.back,
-        allowsEditing: true,
-        quality: 0.5,
-      });
-
-      if (!result.canceled) {
-        try {
-          dispatch(addPhoto(result.assets[0].uri));
-        } catch (error) {
-          console.log(error);
-        }
-        saveToGallery(result.assets[0].uri);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //===============================================
 
   const clearReport = () => {
     dispatch(clearData());
   };
 
+  const goHome = () => {
+    navigation.navigate("Main");
+    clearReport();
+  };
   //===============================================
 
   const sendMail = async () => {
@@ -116,24 +69,13 @@ const ReportScreen = () => {
     navigation.navigate("Main");
   };
 
-  const goHome = () => {
-    navigation.navigate("Main");
-    clearReport();
-  };
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
         behavior={Platform.OS == "android" ? "height" : "padding"}
         style={{ flex: 1 }}
       >
-        <UploadModal
-          visibleFunc={modalVisible}
-          requestFunc={requestClose}
-          pressFunc={toggleModal}
-          cameraFunc={makeImage}
-          galleryFunc={pickImage}
-        />
+        <UploadModal />
         <View style={styles.container}>
           {image ? (
             <View style={styles.photoInContainer}>
