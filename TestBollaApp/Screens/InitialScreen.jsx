@@ -1,5 +1,4 @@
 import { MaterialIcons } from "@expo/vector-icons";
-//import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import UploadModal from "../src/components/UploadModalFolder/UploadModal";
@@ -7,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { toggleModalVisible } from "../src/redux/modal/modalSlice";
 
 const InitialScreen = () => {
-  //const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const toggleModal = () => {
@@ -21,7 +19,7 @@ const InitialScreen = () => {
       <TouchableOpacity style={styles.addPhotoBtn} onPress={toggleModal}>
         <MaterialIcons name="add" size={90} color="#fff" />
       </TouchableOpacity>
-      <Text style={styles.description}>Premi "Piu" per aggiungere i dati</Text>
+      <Text style={styles.description}>Premi "Piu" per aggiungere la foto</Text>
     </View>
   );
 };
