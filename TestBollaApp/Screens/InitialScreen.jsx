@@ -1,33 +1,22 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import UploadModal from "../src/components/UploadModalFolder/UploadModal";
+import { useDispatch } from "react-redux";
+import { toggleModalVisible } from "../src/redux/modal/modalSlice";
 
 const InitialScreen = () => {
   const navigation = useNavigation();
-
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const requestClose = () => {
-    Alert.alert("Modal has been closed.");
-    setModalVisible(false);
-  };
+  const dispatch = useDispatch();
 
   const toggleModal = () => {
-    setModalVisible(!modalVisible);
+    dispatch(toggleModalVisible());
   };
 
-  const toCamera = () => {
-    navigation.navigate("Report");
-  };
   return (
     <View style={styles.container}>
-      <UploadModal
-        visibleFunc={modalVisible}
-        requestFunc={requestClose}
-        pressFunc={toggleModal}
-      />
+      <UploadModal />
       <Text style={styles.userName}>Nome Cognome</Text>
       <TouchableOpacity style={styles.addPhotoBtn} onPress={toggleModal}>
         <MaterialIcons name="add" size={90} color="#fff" />
