@@ -4,8 +4,9 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
+//import { useRoute } from "@react-navigation/native";
 
-const { height } = Dimensions.get("window");
+//const { height } = Dimensions.get("window");
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
@@ -17,8 +18,6 @@ const HomeScreen = () => {
             let iconName;
             if (route.name === "Report") {
               iconName = focused ? "document-text" : "document-text-outline";
-            } else if (route.name === "Camera") {
-              iconName = focused ? "camera" : "camera-outline";
             } else if (route.name === "Main") {
               iconName = focused ? "home" : "home-outline";
             }
@@ -29,7 +28,6 @@ const HomeScreen = () => {
           tabBarShowLabel: false,
           tabBarStyle: {
             width: "100%",
-            height: height,
             height: 50,
             paddingHorizontal: 50,
             borderTopColor: "#A9A9A9",
