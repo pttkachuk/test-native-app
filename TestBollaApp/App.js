@@ -7,6 +7,7 @@ import 'react-native-gesture-handler';
 import HomeScreen from './Screens/HomeScreen';
 import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
 import InitialScreen from './Screens/InitialScreen';
+import LoginScreen from './Screens/LoginScreenFolder/LoginScreen';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -37,6 +38,9 @@ export default function App() {
             }} />
             <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
           </MainStack.Navigator>
+          <MainStack.Screen name='Login' component={LoginScreen} options={{
+            headerShown: false,
+          }} />
           <StatusBar style='light' />
         </NavigationContainer>
       </PersistGate>
