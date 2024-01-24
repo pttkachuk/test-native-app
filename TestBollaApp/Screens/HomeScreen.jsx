@@ -4,6 +4,7 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
+//import LoginScreen from "./LoginScreenFolder/LoginScreen";
 //import { useRoute } from "@react-navigation/native";
 
 //const { height } = Dimensions.get("window");
