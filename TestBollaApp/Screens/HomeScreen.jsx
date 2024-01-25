@@ -1,13 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
 //import LoginScreen from "./LoginScreenFolder/LoginScreen";
-//import { useRoute } from "@react-navigation/native";
 
-//const { height } = Dimensions.get("window");
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
