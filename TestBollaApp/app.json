@@ -6,15 +6,17 @@
     "orientation": "portrait",
     "icon": "./assets/techne-logo-small.png",
     "userInterfaceStyle": "light",
-    "plugins":[
-      ["expo-image-picker",
-      {
-        "photosPermission": "The app accesses your photos to let you share them with your friends.",
-        "cameraPermission": "Allow  $(PRODUCT_NAME) to open the camera",
-        "//": "Disable the microphone permission",
-        "microphonePermission": false
-      }
-    ]
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "Allow  $(PRODUCT_NAME) to open the camera",
+          "//": "Disable the microphone permission",
+          "microphonePermission": false
+        }
+      ],
+      "expo-font"
     ],
     "splash": {
       "image": "./assets/techne-splash-narrow.png",
