@@ -4,7 +4,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
-//import LoginScreen from "./LoginScreenFolder/LoginScreen";
+import LoginScreen from "./LoginScreenFolder/LoginScreen";
 
 const Tabs = createBottomTabNavigator();
 
@@ -19,6 +19,8 @@ const HomeScreen = () => {
               iconName = focused ? "document-text" : "document-text-outline";
             } else if (route.name === "Main") {
               iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Login") {
+              iconName = focused ? "at-circle" : "at-circle-outline";
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -55,6 +57,20 @@ const HomeScreen = () => {
           component={ReportScreen}
           options={{
             headerTitle: "Dati da inserire",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontFamily: "Fira-Sans-Light",
+              fontSize: 14,
+              color: "#fff",
+            },
+            headerStyle: { backgroundColor: "#073C85" },
+          }}
+        />
+        <Tabs.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerTitle: "Login",
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "Fira-Sans-Light",
