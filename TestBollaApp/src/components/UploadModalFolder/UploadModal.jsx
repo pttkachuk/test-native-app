@@ -1,7 +1,7 @@
 import React from "react";
-import * as ImagePicker from "expo-image-picker";
-import { Alert, Modal, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./UploadModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectModalVisible } from "../../redux/modal/modalSelectors";
@@ -16,13 +16,12 @@ import {
 
 const UploadModal = () => {
   const dispatch = useDispatch();
-  const route = useRoute();
+  //const route = useRoute();
   const navigation = useNavigation();
   const modalVisible = useSelector(selectModalVisible);
   const isFocused = useIsFocused();
 
   const requestCloseFunc = () => {
-    //Alert.alert("Modal has been closed.");
     console.log("Modal has been closed");
     dispatch(requestClose());
   };
