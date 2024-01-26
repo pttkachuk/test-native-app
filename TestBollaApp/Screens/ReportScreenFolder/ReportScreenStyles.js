@@ -47,13 +47,13 @@ export const styles = StyleSheet.create({
     bottomBtns: {
         display: "flex",
         width: "100%",
+        height: 75,
         padding: 0,
-        marginTop: "auto",
+        marginTop: 160,
         justifyContent: "space-between",
         flexDirection: "row",
         alignContent: "center",
         alignItems: "center",
-        height: 50,
     },
     btn: {
         backgroundColor: "#073C85",
@@ -72,10 +72,10 @@ export const styles = StyleSheet.create({
     exitBtnWrap: {
         width: "100%",
         height: 75,
+        marginTop: 145,
         padding: 0,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "auto",
     },
     exitBtn: {
         width: "100%",
