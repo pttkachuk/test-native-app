@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -94,6 +95,7 @@ const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
+        <Text style={styles.title}>Entra nel Bolla App</Text>
         <View style={styles.inputsContainer}>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}

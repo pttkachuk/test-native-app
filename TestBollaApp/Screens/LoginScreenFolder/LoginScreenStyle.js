@@ -58,5 +58,11 @@ export const styles = StyleSheet.create({
         fontFamily: "Fira-Sans-Regular",
         fontSize: 12,
     },
+    title: {
+        fontFamily: 'Fira-Sans-Medium',
+        fontSize: 20,
+        marginBottom: 45,
+        textAlign: 'center',
+    }
 
 });
