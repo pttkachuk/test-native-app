@@ -57,8 +57,9 @@ export const styles = StyleSheet.create({
     },
     btn: {
         backgroundColor: "#073C85",
-        paddingRight: 60,
-        paddingLeft: 60,
+        alignItems: 'center',
+        width: 150,
+        maxWidth: 150,
         paddingTop: 15,
         paddingBottom: 15,
         borderRadius: 8,
