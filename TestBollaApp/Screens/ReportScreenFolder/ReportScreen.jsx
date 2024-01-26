@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCode, clearData } from "../../src/redux/data/dataSlice";
 import { selectCode, selectImage } from "../../src/redux/data/dataSelectors";
 import { toggleModalVisible } from "../../src/redux/modal/modalSlice";
+import { selectUserName } from "../../src/redux/auth/authSelector";
 
 const ReportScreen = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const ReportScreen = () => {
 
   const image = useSelector(selectImage);
   const code = useSelector(selectCode);
+  const userName = useSelector(selectUserName);
 
   //===============================================
   const onChangeValue = (value) => {
@@ -51,7 +53,9 @@ const ReportScreen = () => {
 
   const sendMail = async () => {
     try {
-      const mailBody = `Buongiorno.\n\n Invio la bolla con numero di commessa: ${code}.\n\n`;
+      const mailBody = `Buongiorno.\n\n Invio la bolla con numero di commessa: ${code}.\n\n ${
+        !userName ? "" : `Distinti saluti, ${userName}.`
+      }\n\n`;
       await MailComposer.composeAsync({
         recipients: ["petrotkachuk6@gmail.com"],
         subject: "Documento di trasporto",
