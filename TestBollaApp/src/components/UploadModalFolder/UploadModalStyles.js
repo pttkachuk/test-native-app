@@ -38,17 +38,12 @@ export const styles = StyleSheet.create({
         fontFamily: "Fira-Sans-Light",
         textAlign: "center",
     },
-    modalText: {
-        marginBottom: 15,
-        fontFamily: "Fira-Sans-Light",
-        textAlign: "center",
-    },
     btnbox: {
         alignItems: "center",
     },
     btnText: {
-        marginTop: 10,
+        paddingTop: 10,
         fontFamily: "Fira-Sans-Light",
-        fontSize: 10,
+        fontSize: 12,
     },
 });

@@ -8,15 +8,10 @@ import { selectModalVisible } from "../../redux/modal/modalSelectors";
 import { requestClose, toggleModalVisible } from "../../redux/modal/modalSlice";
 import { addPhoto } from "../../redux/data/dataSlice";
 import { saveToGallery } from "../../helpers/SaveToGallery";
-import {
-  useIsFocused,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 const UploadModal = () => {
   const dispatch = useDispatch();
-  //const route = useRoute();
   const navigation = useNavigation();
   const modalVisible = useSelector(selectModalVisible);
   const isFocused = useIsFocused();
