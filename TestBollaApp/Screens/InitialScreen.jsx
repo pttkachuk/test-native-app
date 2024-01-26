@@ -2,8 +2,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import UploadModal from "../src/components/UploadModalFolder/UploadModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleModalVisible } from "../src/redux/modal/modalSlice";
+import { selectUserName } from "../src/redux/auth/authSelector";
 
 const InitialScreen = () => {
   const dispatch = useDispatch();
@@ -12,10 +13,14 @@ const InitialScreen = () => {
     dispatch(toggleModalVisible());
   };
 
+  const userName = useSelector(selectUserName);
+
   return (
     <View style={styles.container}>
       <UploadModal />
-      <Text style={styles.userName}>Nome Cognome</Text>
+      <Text style={styles.userName}>
+        {!userName ? "Nome Utente" : userName}
+      </Text>
       <TouchableOpacity style={styles.addPhotoBtn} onPress={toggleModal}>
         <MaterialIcons name="add" size={90} color="#fff" />
       </TouchableOpacity>
