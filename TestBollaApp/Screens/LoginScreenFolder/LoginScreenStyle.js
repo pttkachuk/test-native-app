@@ -5,11 +5,12 @@ export const styles = StyleSheet.create({
         flex: 1,
         padding: 15,
         backgroundColor: '#fff',
-        //justifyContent: 'center',
+        justifyContent: 'center',
     },
     inputsContainer: {
         display: 'flex',
         flexDirection: 'column',
+        marginBottom: 15,
     },
     input: {
         width: "100%",
@@ -18,19 +19,6 @@ export const styles = StyleSheet.create({
         paddingLeft: 15,
         backgroundColor: "transparent",
         borderRadius: 8,
-        //marginBottom: 45,
-    },
-    btn: {
-        backgroundColor: "#073C85",
-        paddingTop: 13.5,
-        paddingBottom: 13.5,
-        borderRadius: 8,
-    },
-    btnText: {
-        textAlign: 'center',
-        color: "#fff",
-        fontFamily: "Fira-Sans-Medium",
-        fontSize: 14,
     },
     photoInContainer: {
         display: "flex",
@@ -45,4 +33,30 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
         overflow: "hidden",
     },
+    loginBtns: {
+        display: "flex",
+        width: "100%",
+        padding: 0,
+        //marginTop: "auto",
+        justifyContent: "space-between",
+        flexDirection: "row",
+        alignContent: "center",
+        alignItems: "center",
+        height: 50,
+    },
+    btn: {
+        alignItems: 'center',
+        width: 150,
+        maxWidth: 150,
+        backgroundColor: "#073C85",
+        paddingTop: 15,
+        paddingBottom: 15,
+        borderRadius: 8,
+    },
+    btnText: {
+        color: "#fff",
+        fontFamily: "Fira-Sans-Regular",
+        fontSize: 12,
+    },
+
 });
