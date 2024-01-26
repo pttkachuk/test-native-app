@@ -11,15 +11,9 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectEmail,
-  selectIsLoggedIn,
-  selectPassword,
-  selectUserName,
-} from "../../src/redux/auth/authSelector";
+import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
 import { signIn, signOut } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
-const imageTechne = "../../src/images/logoptfinalthelastonewow.png";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -29,9 +23,6 @@ const LoginScreen = () => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  //const userName = useSelector(selectUserName);
-  //const userEmail = useSelector(selectEmail);
-  //const userPassword = useSelector(selectPassword);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const [userName, setUserName] = useState("");
