@@ -120,7 +120,7 @@ const ReportScreen = () => {
           {!image || !code ? (
             <View style={styles.exitBtnWrap}>
               <Text style={styles.alertText}>
-                prima aggiungi i dati e dopo potrai inviarli
+                prima aggiungi tutti i dati e dopo potrai inviarli
               </Text>
               <TouchableOpacity style={styles.exitBtn} onPress={goHome}>
                 <Text style={styles.exitBtnText}>
