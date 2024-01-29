@@ -8,6 +8,7 @@ import LoginScreen from "./LoginScreenFolder/LoginScreen";
 import { useDispatch } from "react-redux";
 import { signOut } from "../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../src/firebase/config";
 
 const Tabs = createBottomTabNavigator();
 
@@ -15,12 +16,15 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const signOutUser = () => {
-    try {
-      dispatch(signOut());
-      navigation.navigate("Login");
-    } catch (error) {
-      console.log(error);
-    }
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(signOut());
+        navigation.navigate("Login");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
   const LogOutBtn = () => (
     <TouchableOpacity
