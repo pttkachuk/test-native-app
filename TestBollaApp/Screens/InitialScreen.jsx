@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontFamily: "Fira-Sans-Light",
+    color: "#A9A9A9",
     fontSize: 14,
   },
 });
