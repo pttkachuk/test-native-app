@@ -26,16 +26,6 @@ export const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    // loginBtns: {
-    //     display: "flex",
-    //     width: "100%",
-    //     padding: 0,
-    //     justifyContent: "space-between",
-    //     flexDirection: "row",
-    //     alignContent: "center",
-    //     alignItems: "center",
-    //     height: 50,
-    // },
     btn: {
         alignItems: 'center',
         maxWidth: '100%',
@@ -53,9 +43,21 @@ export const styles = StyleSheet.create({
         fontFamily: 'Fira-Sans-Medium',
         fontSize: 20,
         color: '#073C85',
-        marginBottom: 45,
+        marginBottom: 35,
         textAlign: 'center',
     },
-
-
+    password: {
+        fontFamily: 'Fira-Sans-Light',
+        fontSize: 12,
+        color: '#D3D3D3',
+        textAlign: 'center',
+        marginTop: 15,
+    },
+    bottomLogo: {
+        width: 95,
+        height: 70,
+        marginTop: 110,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
 });
