@@ -1,14 +1,36 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
 import LoginScreen from "./LoginScreenFolder/LoginScreen";
+import { useDispatch } from "react-redux";
+import { signOut } from "../src/redux/auth/authSlice";
+import { useNavigation } from "@react-navigation/native";
 
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const signOutUser = () => {
+    try {
+      dispatch(signOut());
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const LogOutBtn = () => (
+    <TouchableOpacity
+      style={{ paddingRight: 20 }}
+      activeOpacity={0.5}
+      onPress={signOutUser}
+    >
+      <Ionicons name="exit-outline" size={22} color="#fff" />
+    </TouchableOpacity>
+  );
   return (
     <View style={styles.container}>
       <Tabs.Navigator
@@ -19,8 +41,6 @@ const HomeScreen = () => {
               iconName = focused ? "document-text" : "document-text-outline";
             } else if (route.name === "Main") {
               iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Login") {
-              iconName = focused ? "at-circle" : "at-circle-outline";
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -44,6 +64,7 @@ const HomeScreen = () => {
           options={{
             headerTitle: "Pagina principale",
             headerTitleAlign: "center",
+            headerRight: LogOutBtn,
             headerTitleStyle: {
               fontFamily: "Fira-Sans-Light",
               fontSize: 14,
@@ -57,20 +78,6 @@ const HomeScreen = () => {
           component={ReportScreen}
           options={{
             headerTitle: "Dati da inserire",
-            headerTitleAlign: "center",
-            headerTitleStyle: {
-              fontFamily: "Fira-Sans-Light",
-              fontSize: 14,
-              color: "#fff",
-            },
-            headerStyle: { backgroundColor: "#073C85" },
-          }}
-        />
-        <Tabs.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerTitle: "Login",
             headerTitleAlign: "center",
             headerTitleStyle: {
               fontFamily: "Fira-Sans-Light",
