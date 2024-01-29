@@ -20,7 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../src/firebase/config";
 
-import techneLogo from "../../src/images/techne-logo-2x.png";
+import techneLogo from "../../src/images/techno-login-bottom.png";
 import techneNarrow from "../../src/images/techne-logo-narrow.png";
 
 const LoginScreen = () => {
@@ -173,9 +173,15 @@ const LoginScreen = () => {
             />
           </KeyboardAvoidingView>
         </View>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={signInUser}>
           <Text style={styles.btnText}>Entra</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={togglePassword} disabled={!userPassword}>
+          <Text style={styles.password}>
+            {hidePassword ? "Mostra password" : "Nascondi password"}
+          </Text>
+        </TouchableOpacity>
+        <Image source={techneLogo} style={styles.bottomLogo} />
       </View>
     </TouchableWithoutFeedback>
   );
