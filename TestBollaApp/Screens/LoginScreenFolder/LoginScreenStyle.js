@@ -3,9 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
+        padding: 55,
         backgroundColor: '#fff',
-        justifyContent: 'center',
     },
     inputsContainer: {
         display: 'flex',
@@ -14,43 +13,35 @@ export const styles = StyleSheet.create({
     },
     input: {
         width: "100%",
-        height: 50,
+        height: 45,
         fontFamily: "Fira-Sans-Light",
         paddingLeft: 15,
         backgroundColor: "transparent",
         borderRadius: 8,
     },
-    photoInContainer: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: 300,
-        backgroundColor: "transparent",
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: "#D3D3D3",
-        marginBottom: 15,
-        overflow: "hidden",
-    },
-    loginBtns: {
-        display: "flex",
-        width: "100%",
-        padding: 0,
-        //marginTop: "auto",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        alignContent: "center",
-        alignItems: "center",
+    photo: {
+        width: 50,
         height: 50,
+        marginBottom: 120,
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
+    // loginBtns: {
+    //     display: "flex",
+    //     width: "100%",
+    //     padding: 0,
+    //     justifyContent: "space-between",
+    //     flexDirection: "row",
+    //     alignContent: "center",
+    //     alignItems: "center",
+    //     height: 50,
+    // },
     btn: {
         alignItems: 'center',
-        width: 150,
-        maxWidth: 150,
+        maxWidth: '100%',
         backgroundColor: "#073C85",
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingTop: 10,
+        paddingBottom: 10,
         borderRadius: 8,
     },
     btnText: {
@@ -61,8 +52,10 @@ export const styles = StyleSheet.create({
     title: {
         fontFamily: 'Fira-Sans-Medium',
         fontSize: 20,
+        color: '#073C85',
         marginBottom: 45,
         textAlign: 'center',
-    }
+    },
+
 
 });
