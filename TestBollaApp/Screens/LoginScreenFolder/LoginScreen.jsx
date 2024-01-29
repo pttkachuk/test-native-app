@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Alert,
   Image,
-  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -26,6 +26,7 @@ import techneNarrow from "../../src/images/techne-logo-narrow.png";
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false);
   const [userNameFocused, setUserNameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -86,6 +87,7 @@ const LoginScreen = () => {
       Alert.alert("Inserisci o tuoi credenziali!");
     } else {
       try {
+        setIsLoading(true);
         const credentials = await signInWithEmailAndPassword(
           auth,
           userEmail,
@@ -102,7 +104,12 @@ const LoginScreen = () => {
         return credentials.user;
       } catch (error) {
         console.log(error);
+        Alert.alert(
+          "Errore durante l'accesso",
+          "Verifica le tue credenziali e riprova."
+        );
       } finally {
+        setIsLoading(false);
         resetForm();
         navigation.navigate("Main");
       }
@@ -182,6 +189,7 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
         <Image source={techneLogo} style={styles.bottomLogo} />
+        {isLoading && <ActivityIndicator size="small" color="#073C85" />}
       </View>
     </TouchableWithoutFeedback>
   );
