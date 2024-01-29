@@ -28,7 +28,7 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <MainStack.Navigator initialRouteName='Home'>
+          <MainStack.Navigator initialRouteName='Login'>
             <MainStack.Screen name='Home' component={HomeScreen} options={{
               headerShown: false,
             }} />
@@ -36,10 +36,10 @@ export default function App() {
               headerShown: false,
             }} />
             <MainStack.Screen name='Main' component={InitialScreen} options={{ headerShown: false, }} />
+            <MainStack.Screen name='Login' component={LoginScreen} options={{
+              headerShown: false,
+            }} />
           </MainStack.Navigator>
-          <MainStack.Screen name='Login' component={LoginScreen} options={{
-            headerShown: false,
-          }} />
           <StatusBar style='light' />
         </NavigationContainer>
       </PersistGate>
