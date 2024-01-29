@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
@@ -14,10 +15,13 @@ import {
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
-import { signIn, signOut } from "../../src/redux/auth/authSlice";
+import { signIn } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../src/firebase/config";
+
+import techneLogo from "../../src/images/techne-logo-2x.png";
+import techneNarrow from "../../src/images/techne-logo-narrow.png";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -104,21 +108,16 @@ const LoginScreen = () => {
       }
     }
   };
-
-  const signOutUser = () => {
-    try {
-      dispatch(signOut());
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
+        <Image source={techneNarrow} style={styles.photo} />
+
         <Text style={styles.title}>Entra nel Bolla App</Text>
         <View style={styles.inputsContainer}>
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 0}
           >
             <TextInput
               style={[
@@ -174,26 +173,9 @@ const LoginScreen = () => {
             />
           </KeyboardAvoidingView>
         </View>
-        <View style={styles.loginBtns}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={togglePassword}
-            disabled={!userPassword}
-          >
-            <Text style={styles.btnText}>
-              {hidePassword ? "Mostra Password" : "Nascondi Password"}
-            </Text>
-          </TouchableOpacity>
-          {!isLoggedIn ? (
-            <TouchableOpacity style={styles.btn} onPress={signInUser}>
-              <Text style={styles.btnText}>Entra</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity style={styles.btn} onPress={signOutUser}>
-              <Text style={styles.btnText}>Esci</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <TouchableOpacity style={styles.btn}>
+          <Text style={styles.btnText}>Entra</Text>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
   );
