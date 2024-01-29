@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
 import { signIn, signOut } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../src/firebase/config";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -75,11 +77,16 @@ const LoginScreen = () => {
     setUserPassword("");
   };
 
-  const signInUser = () => {
+  const signInUser = async () => {
     if (!userName && !userEmail && !userPassword) {
       Alert.alert("Inserisci o tuoi credenziali!");
     } else {
       try {
+        const credentials = await signInWithEmailAndPassword(
+          auth,
+          userEmail,
+          userPassword
+        );
         dispatch(
           signIn({
             email: userEmail,
@@ -87,6 +94,8 @@ const LoginScreen = () => {
             userName: userName,
           })
         );
+        console.log(credentials.user);
+        return credentials.user;
       } catch (error) {
         console.log(error);
       } finally {
