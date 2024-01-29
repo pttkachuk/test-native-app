@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
-import LoginScreen from "./LoginScreenFolder/LoginScreen";
 import { useDispatch } from "react-redux";
 import { signOut } from "../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
@@ -49,7 +48,7 @@ const HomeScreen = () => {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: "#073C85",
-          tabBarInactiveTintColor: "#A9A9A9",
+          tabBarInactiveTintColor: "#D3D3D3",
           tabBarShowLabel: false,
           tabBarStyle: {
             width: "100%",

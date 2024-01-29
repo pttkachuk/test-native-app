@@ -131,7 +131,7 @@ const ReportScreen = () => {
           ) : (
             <View style={styles.bottomBtns}>
               <TouchableOpacity style={styles.btn} onPress={clearReport}>
-                <Text style={styles.btnText}>Elimina</Text>
+                <Text style={styles.btnText}>Annulla</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn} onPress={sendMail}>
                 <Text style={styles.btnText}>Invia</Text>
