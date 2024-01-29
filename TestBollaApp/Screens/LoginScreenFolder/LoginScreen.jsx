@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
@@ -29,6 +30,12 @@ const LoginScreen = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigation.navigate("Home");
+    }
+  }, [isLoggedIn, navigation]);
 
   const handleFocus = (name) => {
     if (name === "username") {
@@ -69,19 +76,23 @@ const LoginScreen = () => {
   };
 
   const signInUser = () => {
-    try {
-      dispatch(
-        signIn({
-          email: userEmail,
-          password: userPassword,
-          userName: userName,
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    } finally {
-      resetForm();
-      navigation.navigate("Main");
+    if (!userName && !userEmail && !userPassword) {
+      Alert.alert("Inserisci o tuoi credenziali!");
+    } else {
+      try {
+        dispatch(
+          signIn({
+            email: userEmail,
+            password: userPassword,
+            userName: userName,
+          })
+        );
+      } catch (error) {
+        console.log(error);
+      } finally {
+        resetForm();
+        navigation.navigate("Main");
+      }
     }
   };
 
@@ -155,7 +166,11 @@ const LoginScreen = () => {
           </KeyboardAvoidingView>
         </View>
         <View style={styles.loginBtns}>
-          <TouchableOpacity style={styles.btn} onPress={togglePassword}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={togglePassword}
+            disabled={!userPassword}
+          >
             <Text style={styles.btnText}>
               {hidePassword ? "Mostra Password" : "Nascondi Password"}
             </Text>
