@@ -84,35 +84,34 @@ const LoginScreen = () => {
 
   const signInUser = async () => {
     if (!userName && !userEmail && !userPassword) {
-      Alert.alert("Inserisci o tuoi credenziali!");
-    } else {
-      try {
-        setIsLoading(true);
-        const credentials = await signInWithEmailAndPassword(
-          auth,
-          userEmail,
-          userPassword
-        );
-        dispatch(
-          signIn({
-            email: userEmail,
-            password: userPassword,
-            userName: userName,
-          })
-        );
-        console.log(credentials.user);
-        return credentials.user;
-      } catch (error) {
-        console.log(error);
-        Alert.alert(
-          "Errore durante l'accesso",
-          "Verifica le tue credenziali e riprova."
-        );
-      } finally {
-        setIsLoading(false);
-        resetForm();
-        navigation.navigate("Main");
-      }
+      return Alert.alert("Inserisci o tuoi credenziali!");
+    }
+    try {
+      setIsLoading(true);
+      const credentials = await signInWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      );
+      dispatch(
+        signIn({
+          email: userEmail,
+          password: userPassword,
+          userName: userName,
+        })
+      );
+      setIsLoading(false);
+      resetForm();
+      navigation.navigate("Home");
+      console.log(credentials.user);
+      return credentials.user;
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      Alert.alert(
+        "Errore durante l'accesso",
+        "Verifica le tue credenziali e riprova."
+      );
     }
   };
   return (
