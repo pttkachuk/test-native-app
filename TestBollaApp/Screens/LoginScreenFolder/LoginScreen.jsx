@@ -103,7 +103,7 @@ const LoginScreen = () => {
       setIsLoading(false);
       resetForm();
       navigation.navigate("Home");
-      console.log(credentials.user);
+      //console.log(credentials.user);
       return credentials.user;
     } catch (error) {
       setIsLoading(false);
