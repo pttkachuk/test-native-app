@@ -1,0 +1,1 @@
+export const selectExitModalVisible = (state) => state.exitModal.modalVisible;

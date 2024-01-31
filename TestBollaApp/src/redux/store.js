@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dataReducer } from './data/dataSlice';
 import { modalReducer } from './modal/modalSlice';
 import { authReducer } from './auth/authSlice';
+import { exitModalReducer } from './exitModal/exitModalSlice';
 
 const persistConfigAuth = {
     key: 'auth',
@@ -26,6 +27,7 @@ export const store = configureStore({
         auth: persistAuthReducer,
         data: dataReducer,
         modal: modalReducer,
+        exitModal: exitModalReducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
