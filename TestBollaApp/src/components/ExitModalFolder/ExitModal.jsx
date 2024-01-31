@@ -60,7 +60,7 @@ const ExitModal = () => {
               <TouchableOpacity style={styles.exitButton} onPress={signOutUser}>
                 <Ionicons name="exit-outline" size={35} color="#fff" />
               </TouchableOpacity>
-              <Text style={styles.btnText}>Si, esci</Text>
+              <Text style={styles.btnText}>Esci</Text>
             </View>
             <View style={styles.btnbox}>
               <TouchableOpacity style={styles.cancelBtn} onPress={toggleExit}>
