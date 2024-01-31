@@ -86,20 +86,29 @@ const UploadModal = () => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.btnbox}>
-            <TouchableOpacity style={styles.button} onPress={makeImage}>
-              <Ionicons name="camera-outline" size={35} color="#073C85" />
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "#073C85" }]}
+              onPress={makeImage}
+            >
+              <Ionicons name="camera-outline" size={35} color="#fff" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Camera</Text>
           </View>
           <View style={styles.btnbox}>
-            <TouchableOpacity style={styles.button} onPress={pickImage}>
-              <Ionicons name="image-sharp" size={35} color="#008000" />
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "#008000" }]}
+              onPress={pickImage}
+            >
+              <Ionicons name="image-sharp" size={35} color="#fff" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Foto</Text>
           </View>
           <View style={styles.btnbox}>
-            <TouchableOpacity style={styles.button} onPress={toggleModal}>
-              <Ionicons name="close-outline" size={35} color="#D22B2B" />
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "#D22B2B" }]}
+              onPress={toggleModal}
+            >
+              <Ionicons name="close-outline" size={35} color="#fff" />
             </TouchableOpacity>
             <Text style={styles.btnText}>Annulla</Text>
           </View>
