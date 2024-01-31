@@ -5,37 +5,29 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import ReportScreen from "./ReportScreenFolder/ReportScreen";
 import InitialScreen from "./InitialScreen";
 import { useDispatch } from "react-redux";
-import { signOut } from "../src/redux/auth/authSlice";
-import { useNavigation } from "@react-navigation/native";
-import { auth } from "../src/firebase/config";
+import ExitModal from "../src/components/ExitModalFolder/ExitModal";
+import { toggleExitModal } from "../src/redux/exitModal/exitModalSlice";
 
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const signOutUser = () => {
-    auth
-      .signOut()
-      .then(() => {
-        dispatch(signOut());
-        navigation.navigate("Login");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+
+  const toggleModal = () => {
+    dispatch(toggleExitModal());
   };
   const LogOutBtn = () => (
     <TouchableOpacity
       style={{ paddingRight: 20 }}
       activeOpacity={0.5}
-      onPress={signOutUser}
+      onPress={toggleModal}
     >
       <Ionicons name="exit-outline" size={22} color="#fff" />
     </TouchableOpacity>
   );
   return (
     <View style={styles.container}>
+      <ExitModal />
       <Tabs.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
