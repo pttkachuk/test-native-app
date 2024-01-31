@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
     },
     modalView: {
         display: "flex",
@@ -18,14 +19,6 @@ export const styles = StyleSheet.create({
         paddingBottom: 25,
         paddingLeft: 30,
         paddingRight: 30,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 50,
     },
     button: {
         backgroundColor: "#fff",
@@ -40,8 +33,12 @@ export const styles = StyleSheet.create({
     },
     btnbox: {
         alignItems: "center",
+        margin: 0,
+        padding: 0,
     },
     btnText: {
+        margin: 0,
+        padding: 0,
         paddingTop: 10,
         fontFamily: "Fira-Sans-Light",
         fontSize: 12,
