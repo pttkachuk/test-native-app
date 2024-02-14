@@ -14,7 +14,8 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
+//import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
+import { selectIsAuth } from "../../src/redux/auth/authSelector";
 import { signIn } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -22,20 +23,23 @@ import { auth } from "../../src/firebase/config";
 
 import techneLogo from "../../src/images/techno-login-bottom.png";
 import techneNarrow from "../../src/images/techne-logo-narrow.png";
+import { loginUserThunk } from "../../src/redux/auth/authThunk";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const [isLoading, setIsLoading] = useState(false);
-  const [userNameFocused, setUserNameFocused] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [userNameFocused, setUserNameFocused] = useState(false);
+  const [userLoginFocused, setUserLoginFocused] = useState(false);
+  const [userPasswordFocused, setUserPasswordFocused] = useState(false);
+
+  const isLoggedIn = useSelector(selectIsAuth);
 
   const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   useEffect(() => {
@@ -48,11 +52,11 @@ const LoginScreen = () => {
     if (name === "username") {
       setUserNameFocused(true);
       return;
-    } else if (name === "emailAddress") {
-      setEmailFocused(true);
+    } else if (name === "userLogin") {
+      setUserLoginFocused(true);
       return;
     } else if (name === "password") {
-      setPasswordFocused(true);
+      setUserPasswordFocused(true);
       return;
     }
     return;
@@ -62,11 +66,11 @@ const LoginScreen = () => {
     if (name === "username") {
       setUserNameFocused(false);
       return;
-    } else if (name === "emailAddress") {
-      setEmailFocused(false);
+    } else if (name === "userLogin") {
+      setUserLoginFocused(false);
       return;
     } else if (name === "password") {
-      setPasswordFocused(false);
+      setUserPasswordFocused(false);
       return;
     }
     return;
@@ -77,34 +81,61 @@ const LoginScreen = () => {
   };
 
   const resetForm = () => {
-    setUserName("");
-    setUserEmail("");
+    //setUserName("");
+    setUserLogin("");
     setUserPassword("");
   };
 
+  // const signInUser = async () => {
+  //   if (!userName && !userEmail && !userPassword) {
+  //     return Alert.alert("Inserisci o tuoi credenziali!");
+  //   }
+  //   try {
+  //     setIsLoading(true);
+  //     const credentials = await signInWithEmailAndPassword(
+  //       auth,
+  //       userEmail,
+  //       userPassword
+  //     );
+  //     dispatch(
+  //       signIn({
+  //         email: userEmail,
+  //         password: userPassword,
+  //         userName: userName,
+  //       })
+  //     );
+  //     setIsLoading(false);
+  //     resetForm();
+  //     navigation.navigate("Home");
+  //     //console.log(credentials.user);
+  //     return credentials.user;
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     console.log(error);
+  //     Alert.alert(
+  //       "Errore durante l'accesso",
+  //       "Verifica le tue credenziali e riprova."
+  //     );
+  //   }
+  // };
+
   const signInUser = async () => {
-    if (!userName && !userEmail && !userPassword) {
+    if (!userLogin && !userPassword) {
       return Alert.alert("Inserisci o tuoi credenziali!");
     }
     try {
       setIsLoading(true);
-      const credentials = await signInWithEmailAndPassword(
-        auth,
-        userEmail,
-        userPassword
-      );
       dispatch(
-        signIn({
-          email: userEmail,
+        loginUserThunk({
+          login: userLogin,
           password: userPassword,
-          userName: userName,
         })
       );
       setIsLoading(false);
       resetForm();
       navigation.navigate("Home");
       //console.log(credentials.user);
-      return credentials.user;
+      //return credentials.user;
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -114,6 +145,7 @@ const LoginScreen = () => {
       );
     }
   };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -125,7 +157,7 @@ const LoginScreen = () => {
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 0}
           >
-            <TextInput
+            {/* <TextInput
               style={[
                 styles.input,
                 {
@@ -140,35 +172,35 @@ const LoginScreen = () => {
               onChangeText={(text) => setUserName(text)}
               onFocus={() => handleFocus("username")}
               onBlur={() => handleBlur("username")}
-            />
+            /> */}
             <TextInput
               style={[
                 styles.input,
                 {
                   borderWidth: 1,
-                  borderColor: emailFocused ? "#073C85" : "#D3D3D3",
+                  borderColor: userLoginFocused ? "#073C85" : "#D3D3D3",
                   marginBottom: 15,
                 },
               ]}
-              placeholder="Email dell'utente"
-              value={userEmail}
+              placeholder="Login"
+              value={userLogin}
               autoCapitalize="none"
-              autoComplete="email"
-              keyboardType="email-address"
-              textContentType="emailAddress"
-              onChangeText={(text) => setUserEmail(text)}
-              onFocus={() => handleFocus("emailAddress")}
-              onBlur={() => handleBlur("emailAddress")}
+              autoComplete="username"
+              keyboardType="default"
+              textContentType="username"
+              onChangeText={(text) => setUserLogin(text)}
+              onFocus={() => handleFocus("userLogin")}
+              onBlur={() => handleBlur("userLogin")}
             />
             <TextInput
               style={[
                 styles.input,
                 {
                   borderWidth: 1,
-                  borderColor: passwordFocused ? "#073C85" : "#D3D3D3",
+                  borderColor: userPassword ? "#073C85" : "#D3D3D3",
                 },
               ]}
-              placeholder="Password dell'utente"
+              placeholder="Password"
               value={userPassword}
               autoComplete="password"
               textContentType="password"
