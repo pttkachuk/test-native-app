@@ -4,10 +4,11 @@ import { setToken, currentUser, loginUser, logOutUser, resetPassword } from '../
 
 //loginThunk
 export const loginUserThunk = createAsyncThunk(
-    'user/login',
+    'auth/login',
     async (formData, thunkAPI) => {
         try {
             const data = await loginUser(formData);
+            console.log(data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
@@ -17,7 +18,7 @@ export const loginUserThunk = createAsyncThunk(
 
 //currentThunk
 export const currentUserThunk = createAsyncThunk(
-    'user/current',
+    'auth/current',
     async (_, thunkAPI) => {
         const state = thunkAPI.getState();
         const token = state.user.token;
@@ -33,7 +34,7 @@ export const currentUserThunk = createAsyncThunk(
 
 //logoutUser
 export const logoutUserThunk = createAsyncThunk(
-    'user/logout',
+    'auth/logout',
     async (_, thunkAPI) => {
         try {
             const data = await logOutUser();
@@ -46,7 +47,7 @@ export const logoutUserThunk = createAsyncThunk(
 
 //resetPassword
 export const resetPasswordThunk = createAsyncThunk(
-    'user/resetPassword',
+    'auth/resetPassword',
     async (userData, thunkAPI) => {
         try {
             const data = await resetPassword(userData);
