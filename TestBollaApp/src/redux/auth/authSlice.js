@@ -1,24 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginUserThunk, logoutUserThunk, resetPasswordThunk } from "./authThunk";
 
 const initialState = {
-    user: { email: '', password: '', userName: '', },
-    isLoggedIn: false,
+    user: { login: '', password: '', userName: '', },
+    token: null,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        signIn(state, { payload }) {
-            state.user.email = payload.email;
-            state.user.password = payload.password;
-            state.user.userName = payload.userName;
-            state.isLoggedIn = true;
-        },
-        signOut(state) {
-            state.user = { email: '', password: '', userName: '' };
-            state.isLoggedIn = false;
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(loginUserThunk.fulfilled, (state, payload) => {
+                state.user.login = payload.login;
+                state.user.password = payload.password;
+                state.user.userName = payload.userName;
+                state.token = payload.tokne;
+            })
+            .addCase(logoutUserThunk.fulfilled, (state) => {
+                state.user = { login: '', password: '', userName: '' };
+                state.token = null;
+            })
     }
 });
 
