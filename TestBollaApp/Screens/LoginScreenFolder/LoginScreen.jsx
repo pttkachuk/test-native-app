@@ -14,12 +14,8 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
-//import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
 import { selectIsAuth } from "../../src/redux/auth/authSelector";
-//import { signIn } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
-//import { signInWithEmailAndPassword } from "firebase/auth";
-//import { auth } from "../../src/firebase/config";
 
 import techneLogo from "../../src/images/techno-login-bottom.png";
 import techneNarrow from "../../src/images/techne-logo-narrow.png";
@@ -38,7 +34,7 @@ const LoginScreen = () => {
 
   const isLoggedIn = useSelector(selectIsAuth);
 
-  const [userName, setUserName] = useState("");
+  //const [userName, setUserName] = useState("");
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -81,7 +77,6 @@ const LoginScreen = () => {
   };
 
   const resetForm = () => {
-    //setUserName("");
     setUserLogin("");
     setUserPassword("");
   };
@@ -102,7 +97,7 @@ const LoginScreen = () => {
       resetForm();
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+      console.log("LOGIN ERROR:", error);
       Alert.alert(
         "Errore durante l'accesso",
         "Verifica le tue credenziali e riprova."
@@ -147,7 +142,7 @@ const LoginScreen = () => {
                 styles.input,
                 {
                   borderWidth: 1,
-                  borderColor: userPassword ? "#073C85" : "#D3D3D3",
+                  borderColor: userPasswordFocused ? "#073C85" : "#D3D3D3",
                 },
               ]}
               placeholder="Password"
