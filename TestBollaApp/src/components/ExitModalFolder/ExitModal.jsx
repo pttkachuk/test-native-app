@@ -12,6 +12,7 @@ import { selectExitModalVisible } from "../../redux/exitModal/exitModalSelectors
 import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../../firebase/config";
 import { signOut } from "../../redux/auth/authSlice";
+import { logoutUserThunk } from "../../redux/auth/authThunk";
 
 const ExitModal = () => {
   const dispatch = useDispatch();
@@ -27,22 +28,33 @@ const ExitModal = () => {
     dispatch(toggleExitModal());
   };
 
+  // const signOutUser = () => {
+  //   auth
+  //     .signOut()
+  //     .then(() => {
+  //       try {
+  //         dispatch(closeExitModal());
+  //         dispatch(signOut());
+  //       } catch (error) {
+  //         alert(error.message);
+  //       } finally {
+  //         navigation.navigate("Login");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       alert(error.message);
+  //     });
+  // };
+
   const signOutUser = () => {
-    auth
-      .signOut()
-      .then(() => {
-        try {
-          dispatch(closeExitModal());
-          dispatch(signOut());
-        } catch (error) {
-          alert(error.message);
-        } finally {
-          navigation.navigate("Login");
-        }
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    try {
+      dispatch(closeExitModal());
+      dispatch(logoutUserThunk());
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      navigation.navigate("Login");
+    }
   };
 
   return (
