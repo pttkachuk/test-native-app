@@ -11,7 +11,7 @@ export const loginUserThunk = createAsyncThunk(
             console.log('login data:', data);
             return data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
@@ -27,7 +27,7 @@ export const currentUserThunk = createAsyncThunk(
             const data = await currentUser();
             return data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
@@ -40,7 +40,7 @@ export const logoutUserThunk = createAsyncThunk(
             const data = await logOutUser();
             return data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
@@ -53,7 +53,7 @@ export const resetPasswordThunk = createAsyncThunk(
             const data = await resetPassword(userData);
             return data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
