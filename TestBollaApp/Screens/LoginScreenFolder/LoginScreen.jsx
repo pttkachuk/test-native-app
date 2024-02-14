@@ -16,10 +16,10 @@ import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
 //import { selectIsLoggedIn } from "../../src/redux/auth/authSelector";
 import { selectIsAuth } from "../../src/redux/auth/authSelector";
-import { signIn } from "../../src/redux/auth/authSlice";
+//import { signIn } from "../../src/redux/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../src/firebase/config";
+//import { signInWithEmailAndPassword } from "firebase/auth";
+//import { auth } from "../../src/firebase/config";
 
 import techneLogo from "../../src/images/techno-login-bottom.png";
 import techneNarrow from "../../src/images/techne-logo-narrow.png";
@@ -86,39 +86,6 @@ const LoginScreen = () => {
     setUserPassword("");
   };
 
-  // const signInUser = async () => {
-  //   if (!userName && !userEmail && !userPassword) {
-  //     return Alert.alert("Inserisci o tuoi credenziali!");
-  //   }
-  //   try {
-  //     setIsLoading(true);
-  //     const credentials = await signInWithEmailAndPassword(
-  //       auth,
-  //       userEmail,
-  //       userPassword
-  //     );
-  //     dispatch(
-  //       signIn({
-  //         email: userEmail,
-  //         password: userPassword,
-  //         userName: userName,
-  //       })
-  //     );
-  //     setIsLoading(false);
-  //     resetForm();
-  //     navigation.navigate("Home");
-  //     //console.log(credentials.user);
-  //     return credentials.user;
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //     console.log(error);
-  //     Alert.alert(
-  //       "Errore durante l'accesso",
-  //       "Verifica le tue credenziali e riprova."
-  //     );
-  //   }
-  // };
-
   const signInUser = async () => {
     if (!userLogin && !userPassword) {
       return Alert.alert("Inserisci o tuoi credenziali!");
@@ -133,9 +100,6 @@ const LoginScreen = () => {
       );
       setIsLoading(false);
       resetForm();
-      navigation.navigate("Home");
-      //console.log(credentials.user);
-      //return credentials.user;
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -143,6 +107,8 @@ const LoginScreen = () => {
         "Errore durante l'accesso",
         "Verifica le tue credenziali e riprova."
       );
+    } finally {
+      navigation.navigate("Home");
     }
   };
 
@@ -157,22 +123,6 @@ const LoginScreen = () => {
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 0}
           >
-            {/* <TextInput
-              style={[
-                styles.input,
-                {
-                  borderWidth: 1,
-                  borderColor: userNameFocused ? "#073C85" : "#D3D3D3",
-                  marginBottom: 15,
-                },
-              ]}
-              placeholder="Nome Utente"
-              value={userName}
-              textContentType="username"
-              onChangeText={(text) => setUserName(text)}
-              onFocus={() => handleFocus("username")}
-              onBlur={() => handleBlur("username")}
-            /> */}
             <TextInput
               style={[
                 styles.input,

@@ -5,6 +5,7 @@ const initialState = {
     user: { login: '', password: '', userName: '', },
     token: null,
 };
+console.log('initialstate token:', initialState.token);
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -12,6 +13,7 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loginUserThunk.fulfilled, (state, payload) => {
+                console.log(payload.token);
                 state.user.login = payload.login;
                 state.user.password = payload.password;
                 state.user.userName = payload.userName;
