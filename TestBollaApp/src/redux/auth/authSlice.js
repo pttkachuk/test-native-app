@@ -3,7 +3,7 @@ import { loginUserThunk, logoutUserThunk } from "./authThunk";
 
 const initialState = {
     user: { login: null, userName: null },
-    token: null,
+    token: '',
     isLoading: false,
     error: null,
 };
@@ -38,7 +38,7 @@ export const authSlice = createSlice({
             .addCase(logoutUserThunk.fulfilled, (state) => {
                 state.isLoading = false;
                 state.user = { login: null, userName: null };
-                state.token = null;
+                state.token = '';
             })
             .addCase(logoutUserThunk.rejected, (state, action) => {
                 state.isLoading = false;
