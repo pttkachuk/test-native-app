@@ -32,11 +32,13 @@ const ExitModal = () => {
     try {
       dispatch(closeExitModal());
       dispatch(logoutUserThunk());
+      navigation.navigate("Login");
     } catch (error) {
       alert(error.message);
-    } finally {
-      navigation.navigate("Login");
     }
+    //finally {
+    //   navigation.navigate("Login");
+    // }
   };
 
   return (
