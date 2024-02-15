@@ -18,7 +18,7 @@ import { exitModalReducer } from './exitModal/exitModalSlice';
 const persistConfigAuth = {
     key: 'auth',
     storage: AsyncStorage,
-    whitelist: ['token'],
+    //whitelist: ['token'],
 };
 
 const persistAuthReducer = persistReducer(persistConfigAuth, authReducer);
