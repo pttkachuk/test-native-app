@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginUserThunk, logoutUserThunk } from "./authThunk";
 
 const initialState = {
-    user: { login: '', userName: '' },
+    user: { login: null, userName: null },
     token: null,
     isLoading: false,
     error: null,
@@ -19,16 +19,16 @@ export const authSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(loginUserThunk.fulfilled, (state, payload) => {
-                console.log('login fullfiled response:', payload.token);
+            .addCase(loginUserThunk.fulfilled, (state, action) => {
+                console.log('login fullfiled response:', action.payload);
                 state.isLoading = false;
-                state.user.login = payload.login;
-                state.user.userName = payload.name;
-                state.token = payload.token;
+                state.user.login = action.payload.login;
+                state.user.userName = action.payload.name;
+                state.token = action.payload.token;
             })
-            .addCase(loginUserThunk.rejected, (state, payload) => {
+            .addCase(loginUserThunk.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = payload;
+                state.error = action.payload;
             })
             //-------------------- LOGOUT ---------------------------
             .addCase(logoutUserThunk.pending, (state) => {
@@ -37,12 +37,12 @@ export const authSlice = createSlice({
             })
             .addCase(logoutUserThunk.fulfilled, (state) => {
                 state.isLoading = false;
-                state.user = { login: '', userName: '' };
+                state.user = { login: null, userName: null };
                 state.token = null;
             })
-            .addCase(logoutUserThunk.rejected, (state, payload) => {
+            .addCase(logoutUserThunk.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = payload;
+                state.error = action.payload;
             })
     }
 });
