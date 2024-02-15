@@ -96,6 +96,7 @@ const LoginScreen = () => {
       );
       setIsLoading(false);
       resetForm();
+      navigation.navigate("Home");
     } catch (error) {
       setIsLoading(false);
       //console.log("LOGIN ERROR:", error);
@@ -103,9 +104,10 @@ const LoginScreen = () => {
         "Errore durante l'accesso",
         "Verifica le tue credenziali e riprova."
       );
-    } finally {
-      navigation.navigate("Home");
     }
+    //finally {
+    //  navigation.navigate("Home");
+    //}
   };
 
   return (
