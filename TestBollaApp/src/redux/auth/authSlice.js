@@ -20,7 +20,7 @@ export const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginUserThunk.fulfilled, (state, payload) => {
-                console.log(payload.token);
+                console.log('login fullfiled response:', payload.token);
                 state.isLoading = false;
                 state.user.login = payload.login;
                 state.user.userName = payload.name;
