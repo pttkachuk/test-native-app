@@ -33,6 +33,7 @@ const LoginScreen = () => {
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
   const isLoggedIn = useSelector(selectIsAuth);
+  console.log("ISLOGGEDIN:", isLoggedIn);
 
   //const [userName, setUserName] = useState("");
   const [userLogin, setUserLogin] = useState("");
@@ -129,7 +130,6 @@ const LoginScreen = () => {
               ]}
               placeholder="Login"
               value={userLogin}
-              autoCapitalize="none"
               autoComplete="username"
               keyboardType="default"
               textContentType="username"
