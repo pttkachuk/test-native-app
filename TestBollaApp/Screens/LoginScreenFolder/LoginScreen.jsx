@@ -28,7 +28,7 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  const [userNameFocused, setUserNameFocused] = useState(false);
+  //const [userNameFocused, setUserNameFocused] = useState(false);
   const [userLoginFocused, setUserLoginFocused] = useState(false);
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
