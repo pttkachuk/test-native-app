@@ -14,7 +14,7 @@ const InitialScreen = () => {
   };
 
   const userName = useSelector(selectUserName);
-  console.log("UserName at initialscreen:", userName);
+  //console.log("UserName at initialscreen:", userName);
 
   return (
     <View style={styles.container}>

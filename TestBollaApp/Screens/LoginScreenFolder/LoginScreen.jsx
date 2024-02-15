@@ -97,7 +97,7 @@ const LoginScreen = () => {
       resetForm();
     } catch (error) {
       setIsLoading(false);
-      console.log("LOGIN ERROR:", error);
+      //console.log("LOGIN ERROR:", error);
       Alert.alert(
         "Errore durante l'accesso",
         "Verifica le tue credenziali e riprova."
