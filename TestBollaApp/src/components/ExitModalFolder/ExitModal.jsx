@@ -10,8 +10,6 @@ import {
 } from "../../redux/exitModal/exitModalSlice";
 import { selectExitModalVisible } from "../../redux/exitModal/exitModalSelectors";
 import { Ionicons } from "@expo/vector-icons";
-//import { auth } from "../../firebase/config";
-//import { signOut } from "../../redux/auth/authSlice";
 import { logoutUserThunk } from "../../redux/auth/authThunk";
 
 const ExitModal = () => {
@@ -36,9 +34,6 @@ const ExitModal = () => {
     } catch (error) {
       alert(error.message);
     }
-    //finally {
-    //   navigation.navigate("Login");
-    // }
   };
 
   return (
