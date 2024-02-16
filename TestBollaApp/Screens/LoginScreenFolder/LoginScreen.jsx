@@ -14,7 +14,10 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsAuth } from "../../src/redux/auth/authSelector";
+import {
+  selectIsAuth,
+  selectUserToken,
+} from "../../src/redux/auth/authSelector";
 import { useNavigation } from "@react-navigation/native";
 
 import techneLogo from "../../src/images/techno-login-bottom.png";
@@ -28,28 +31,24 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
-  //const [userNameFocused, setUserNameFocused] = useState(false);
   const [userLoginFocused, setUserLoginFocused] = useState(false);
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
-  const isLoggedIn = useSelector(selectIsAuth);
-  console.log("ISLOGGEDIN:", isLoggedIn);
+  //const isAuth = useSelector(selectIsAuth);
+  const isAuth = useSelector(selectUserToken);
+  //console.log("ISLOGGEDIN:", isAuth);
 
-  //const [userName, setUserName] = useState("");
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isAuth) {
       navigation.navigate("Home");
     }
-  }, [isLoggedIn, navigation]);
+  }, [isAuth, navigation]);
 
   const handleFocus = (name) => {
-    if (name === "username") {
-      setUserNameFocused(true);
-      return;
-    } else if (name === "userLogin") {
+    if (name === "userLogin") {
       setUserLoginFocused(true);
       return;
     } else if (name === "password") {
@@ -60,10 +59,7 @@ const LoginScreen = () => {
   };
 
   const handleBlur = (name) => {
-    if (name === "username") {
-      setUserNameFocused(false);
-      return;
-    } else if (name === "userLogin") {
+    if (name === "userLogin") {
       setUserLoginFocused(false);
       return;
     } else if (name === "password") {
@@ -105,9 +101,6 @@ const LoginScreen = () => {
         "Verifica le tue credenziali e riprova."
       );
     }
-    //finally {
-    //  navigation.navigate("Home");
-    //}
   };
 
   return (
