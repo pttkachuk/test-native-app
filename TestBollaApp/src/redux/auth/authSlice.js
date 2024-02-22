@@ -21,12 +21,12 @@ export const authSlice = createSlice({
             })
             .addCase(loginUserThunk.fulfilled, (state, action) => {
                 console.log('login fullfiled response:', action.payload);
-                console.log('token be like', state.userToken);
                 state.isLoading = false;
                 state.user.login = action.payload.login;
                 state.user.name = action.payload.name;
                 state.user.email = action.payload.email;
                 state.userToken = action.payload.token;
+                console.log('token be like', state.userToken);
             })
             .addCase(loginUserThunk.rejected, (state, action) => {
                 state.isLoading = false;

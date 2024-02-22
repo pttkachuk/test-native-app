@@ -8,7 +8,7 @@ export const loginUserThunk = createAsyncThunk(
     async (formData, thunkAPI) => {
         try {
             const data = await loginUser(formData);
-            console.log('login data:', data);
+            //console.log('login data:', data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
