@@ -14,10 +14,7 @@ import {
 } from "react-native";
 import { styles } from "./LoginScreenStyle";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsAuth,
-  selectUserToken,
-} from "../../src/redux/auth/authSelector";
+import { selectUserToken } from "../../src/redux/auth/authSelector";
 import { useNavigation } from "@react-navigation/native";
 
 import techneLogo from "../../src/images/techno-login-bottom.png";
@@ -34,9 +31,7 @@ const LoginScreen = () => {
   const [userLoginFocused, setUserLoginFocused] = useState(false);
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
-  //const isAuth = useSelector(selectIsAuth);
   const isAuth = useSelector(selectUserToken);
-  //console.log("ISLOGGEDIN:", isAuth);
 
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
