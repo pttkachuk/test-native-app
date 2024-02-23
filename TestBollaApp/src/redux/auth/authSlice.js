@@ -5,7 +5,7 @@ const initialState = {
     user: { login: null, name: null, email: null },
     isLoading: false,
     error: null,
-    userToken: null,
+    userToken: null
 };
 
 
@@ -41,6 +41,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.user = { login: null, name: null, email: null };
                 state.userToken = null;
+                console.log('token after logout:', state.userToken);
             })
             .addCase(logoutUserThunk.rejected, (state, action) => {
                 state.isLoading = false;
