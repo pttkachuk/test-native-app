@@ -121,7 +121,6 @@ const LoginScreen = () => {
               placeholder="Login"
               value={userLogin}
               autoComplete="username"
-              keyboardType="default"
               textContentType="username"
               onChangeText={(text) => setUserLogin(text)}
               onFocus={() => handleFocus("userLogin")}
