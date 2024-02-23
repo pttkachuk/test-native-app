@@ -72,8 +72,8 @@ export const styles = StyleSheet.create({
     exitBtnWrap: {
         width: "100%",
         height: 75,
-        marginTop: 'auto',
         padding: 0,
+        marginTop: 'auto',
         justifyContent: "center",
         alignItems: "center",
     },

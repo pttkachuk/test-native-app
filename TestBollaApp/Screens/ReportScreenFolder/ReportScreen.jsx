@@ -147,5 +147,4 @@ const ReportScreen = () => {
     </TouchableWithoutFeedback>
   );
 };
-
 export default ReportScreen;
