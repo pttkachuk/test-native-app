@@ -28,8 +28,8 @@ const ExitModal = () => {
 
   const signOutUser = () => {
     try {
-      dispatch(closeExitModal());
       dispatch(logoutUserThunk());
+      dispatch(closeExitModal());
       navigation.navigate("Login");
     } catch (error) {
       alert(error.message);

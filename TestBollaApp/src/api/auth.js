@@ -29,6 +29,7 @@ export async function loginUser(userData) {
 //logoutUser
 export async function logOutUser() {
     const { data } = await instance.post('/auth/logout');
+    console.log('logout data', data);
     clearToken();
     return data;
 };
