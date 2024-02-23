@@ -90,7 +90,6 @@ const LoginScreen = () => {
       navigation.navigate("Home");
     } catch (error) {
       setIsLoading(false);
-      //console.log("LOGIN ERROR:", error);
       Alert.alert(
         "Errore durante l'accesso",
         "Verifica le tue credenziali e riprova."
