@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
         width: "100%",
         height: 75,
         padding: 0,
-        marginTop: 160,
+        marginTop: 'auto',
         justifyContent: "space-between",
         flexDirection: "row",
         alignContent: "center",
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
     exitBtnWrap: {
         width: "100%",
         height: 75,
-        marginTop: 145,
+        marginTop: 'auto',
         padding: 0,
         justifyContent: "center",
         alignItems: "center",
