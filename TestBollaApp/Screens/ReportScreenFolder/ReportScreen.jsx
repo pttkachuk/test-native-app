@@ -20,7 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCode, clearData } from "../../src/redux/data/dataSlice";
 import { selectCode, selectImage } from "../../src/redux/data/dataSelectors";
 import { toggleModalVisible } from "../../src/redux/modal/modalSlice";
-import { selectUserName } from "../../src/redux/auth/authSelector";
+import {
+  selectUserEmail,
+  selectUserName,
+} from "../../src/redux/auth/authSelector";
 
 const ReportScreen = () => {
   const dispatch = useDispatch();
@@ -31,6 +34,7 @@ const ReportScreen = () => {
   const image = useSelector(selectImage);
   const code = useSelector(selectCode);
   const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
 
   //===============================================
   const onChangeValue = (value) => {
@@ -53,7 +57,7 @@ const ReportScreen = () => {
 
   const sendMail = async () => {
     try {
-      const mailBody = `Buongiorno,\n\n Invio la bolla con numero di commessa: ${code}.\n\n ${
+      const mailBody = `Buongiorno,\n\n Invio la bolla con numero di commessa: ${code}.\n\n Può rispondermi su questa e-mail: ${userEmail}.\n\n ${
         !userName ? "" : `Distinti saluti.\n\n ${userName}, Techne S.p.A. .`
       }\n\n`;
       await MailComposer.composeAsync({
