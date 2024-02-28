@@ -32,7 +32,7 @@ const LoginScreen = () => {
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
   const isAuth = useSelector(selectUserToken);
-  console.log(isAuth);
+  //console.log(isAuth);
 
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -75,11 +75,11 @@ const LoginScreen = () => {
   };
 
   const signInUser = () => {
+    if (!userLogin && !userPassword) {
+      Alert.alert("Inserire tutti i credenziali");
+      return;
+    }
     try {
-      if (!userLogin && !userPassword) {
-        throw new Error("Inserisci entrambe le credenziali!");
-      }
-
       setIsLoading(true);
       dispatch(
         loginUserThunk({
