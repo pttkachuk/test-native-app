@@ -32,6 +32,7 @@ const LoginScreen = () => {
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
   const isAuth = useSelector(selectUserToken);
+  console.log(isAuth);
 
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -73,28 +74,50 @@ const LoginScreen = () => {
     setUserPassword("");
   };
 
-  const signInUser = async () => {
-    if (!userLogin && !userPassword) {
-      return Alert.alert("Inserisci o tuoi credenziali!");
-    }
+  const signInUser = () => {
     try {
+      if (!userLogin && !userPassword) {
+        throw new Error("Inserisci entrambe le credenziali!");
+      }
+
       setIsLoading(true);
       dispatch(
         loginUserThunk({
           login: userLogin,
           password: userPassword,
         })
-      );
-      setIsLoading(false);
-      resetForm();
-      navigation.navigate("Home");
+      )
+        .then(() => {
+          setIsLoading(false);
+          resetForm();
+        })
+        .catch((error) => {
+          setIsLoading(false);
+          handleError(error);
+        });
     } catch (error) {
       setIsLoading(false);
-      Alert.alert(
-        "Errore durante l'accesso",
-        "Verifica le tue credenziali e riprova."
+      handleError(error);
+    }
+  };
+
+  const handleError = (error) => {
+    let errorMessage = Alert.alert(
+      "Si è verificato un errore durante il login. Riprova più tardi."
+    );
+    if (error.response && error.response.status === 401) {
+      errorMessage = Alert.alert("Credenziali non valide. Verifica e riprova.");
+    } else if (error.response && error.response.status === 500) {
+      errorMessage = Alert.alert(
+        "Errore interno del server. Riprova più tardi."
+      );
+    } else if (error.request) {
+      errorMessage = Alert.alert(
+        "Errore di rete. Controlla la tua connessione e riprova."
       );
     }
+
+    Alert.alert("Errore durante l'accesso", errorMessage);
   };
 
   return (
