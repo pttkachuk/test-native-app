@@ -8,7 +8,6 @@ export const loginUserThunk = createAsyncThunk(
     async (formData, thunkAPI) => {
         try {
             const data = await loginUser(formData);
-            //console.log('login data:', data);
             return data;
         } catch (error) {
             // Personalizzazione del messaggio di errore
@@ -17,10 +16,12 @@ export const loginUserThunk = createAsyncThunk(
                 errorMessage = "Credenziali non valide. Verifica e riprova.";
             } else if (error.response && error.response.status === 500) {
                 errorMessage = "Errore interno del server. Riprova più tardi.";
+            } else if (error.request) {
+                errorMessage = "Impossibile connettersi al server. Controlla la tua connessione e riprova.";
             }
 
             // Reject con il messaggio di errore personalizzato
-            return thunkAPI.rejectWithValue(error.message);
+            return thunkAPI.rejectWithValue(errorMessage);
         }
     }
 );
@@ -47,7 +48,6 @@ export const logoutUserThunk = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const data = await logOutUser();
-            console.log('logout THUNK data:', data);
             return data;
         } catch (error) {
             // Personalizzazione del messaggio di errore
@@ -56,10 +56,12 @@ export const logoutUserThunk = createAsyncThunk(
                 errorMessage = "Non sei autorizzato a effettuare questa operazione. Effettua nuovamente il login.";
             } else if (error.response && error.response.status === 500) {
                 errorMessage = "Errore interno del server. Riprova più tardi.";
+            } else if (error.request) {
+                errorMessage = "Impossibile connnettersi al server. Controlla la tua connessione e riprova.";
             }
 
             // Reject con il messaggio di errore personalizzato
-            return thunkAPI.rejectWithValue(error.message);
+            return thunkAPI.rejectWithValue(errorMessage);
         }
     }
 );
