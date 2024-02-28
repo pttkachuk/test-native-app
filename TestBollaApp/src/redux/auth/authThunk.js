@@ -10,7 +10,7 @@ export const loginUserThunk = createAsyncThunk(
             const data = await loginUser(formData);
             return data;
         } catch (error) {
-            // Personalizzazione del messaggio di errore
+
             let errorMessage = "Si è verificato un errore durante il login. Riprova più tardi.";
             if (error.response && error.response.status === 401) {
                 errorMessage = "Credenziali non valide. Verifica e riprova.";
@@ -20,7 +20,6 @@ export const loginUserThunk = createAsyncThunk(
                 errorMessage = "Impossibile connettersi al server. Controlla la tua connessione e riprova.";
             }
 
-            // Reject con il messaggio di errore personalizzato
             return thunkAPI.rejectWithValue(errorMessage);
         }
     }
@@ -50,17 +49,15 @@ export const logoutUserThunk = createAsyncThunk(
             const data = await logOutUser();
             return data;
         } catch (error) {
-            // Personalizzazione del messaggio di errore
             let errorMessage = "Si è verificato un errore durante la disconnessione. Riprova più tardi.";
             if (error.response && error.response.status === 401) {
                 errorMessage = "Non sei autorizzato a effettuare questa operazione. Effettua nuovamente il login.";
             } else if (error.response && error.response.status === 500) {
                 errorMessage = "Errore interno del server. Riprova più tardi.";
             } else if (error.request) {
-                errorMessage = "Impossibile connnettersi al server. Controlla la tua connessione e riprova.";
+                errorMessage = "Impossibile connettersi al server. Controlla la tua connessione e riprova.";
             }
 
-            // Reject con il messaggio di errore personalizzato
             return thunkAPI.rejectWithValue(errorMessage);
         }
     }
