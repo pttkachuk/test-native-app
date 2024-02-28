@@ -1,5 +1,5 @@
-import React from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, Modal, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./ExitModalStyles";
@@ -16,6 +16,7 @@ const ExitModal = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const modalVisible = useSelector(selectExitModalVisible);
+  const [isLoading, setIsLoading] = useState(false);
 
   const requestCloseModal = () => {
     console.log("Modal has been closed");
@@ -28,12 +29,42 @@ const ExitModal = () => {
 
   const signOutUser = () => {
     try {
-      dispatch(logoutUserThunk());
-      dispatch(closeExitModal());
-      navigation.navigate("Login");
+      setIsLoading(true);
+      dispatch(logoutUserThunk())
+        .then(() => {
+          setIsLoading(false);
+          dispatch(closeExitModal());
+          navigation.navigate("Login");
+        })
+        .catch(() => {
+          setIsLoading(false);
+          handleError(error);
+        });
     } catch (error) {
-      alert(error.message);
+      setIsLoading(false);
+      handleError(error);
     }
+  };
+
+  const handleError = (error) => {
+    let errorMessage = Alert.alert(
+      "Si è verificato un errore durante il logout. Riprova più tardi."
+    );
+    if (error.response && error.response.status === 401) {
+      errorMessage = Alert.alert(
+        "Si è verificato un errore. Riprova più tardi."
+      );
+    } else if (error.response && error.response.status === 500) {
+      errorMessage = Alert.alert(
+        "Errore interno del server. Riprova più tardi."
+      );
+    } else if (error.request) {
+      errorMessage = Alert.alert(
+        "Errore di rete. Controlla la tua connessione e riprova."
+      );
+    }
+
+    Alert.alert("Errore durante l'accesso", errorMessage);
   };
 
   return (
