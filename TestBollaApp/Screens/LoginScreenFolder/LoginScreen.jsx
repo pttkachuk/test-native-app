@@ -76,8 +76,7 @@ const LoginScreen = () => {
 
   const signInUser = () => {
     if (!userLogin && !userPassword) {
-      Alert.alert("Inserire tutti i credenziali");
-      return;
+      return Alert.alert("Inserire tutti i credenziali");
     }
     try {
       setIsLoading(true);
@@ -102,19 +101,14 @@ const LoginScreen = () => {
   };
 
   const handleError = (error) => {
-    let errorMessage = Alert.alert(
-      "Si è verificato un errore durante il login. Riprova più tardi."
-    );
+    let errorMessage =
+      "Si è verificato un errore durante il login. Riprova più tardi.";
     if (error.response && error.response.status === 401) {
-      errorMessage = Alert.alert("Credenziali non valide. Verifica e riprova.");
+      errorMessage = "Credenziali non valide. Verifica e riprova.";
     } else if (error.response && error.response.status === 500) {
-      errorMessage = Alert.alert(
-        "Errore interno del server. Riprova più tardi."
-      );
+      errorMessage = "Errore interno del server. Riprova più tardi.";
     } else if (error.request) {
-      errorMessage = Alert.alert(
-        "Errore di rete. Controlla la tua connessione e riprova."
-      );
+      errorMessage = "Errore di rete. Controlla la tua connessione e riprova.";
     }
 
     Alert.alert("Errore durante l'accesso", errorMessage);
