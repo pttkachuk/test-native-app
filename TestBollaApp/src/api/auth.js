@@ -6,11 +6,11 @@ export const instance = axois.create({
 });
 
 export const setToken = token => {
-    instance.defaults.headers.Authorization = `Bearer ${token}`;
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const clearToken = () => {
-    instance.defaults.headers.Authorization = '';
+    instance.defaults.headers.common.Authorization = '';
 };
 
 //currentUser
