@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/redux/store';
-import { ActivityIndicator } from 'react-native';
+//import { ActivityIndicator } from 'react-native';
 
 //const HomeScreen = React.lazy(() => import('./Screens/HomeScreen'));
 //const ReportScreen = React.lazy(() => import('./Screens/ReportScreenFolder/ReportScreen'));
