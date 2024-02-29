@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import * as MailComposer from "expo-mail-composer";
-import React, { useState } from "react";
 import {
   Alert,
   Image,
@@ -14,7 +14,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
+//import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
+const UploadModal = React.lazy(() =>
+  import("../../src/components/UploadModalFolder/UploadModal")
+);
 import { styles } from "./ReportScreenStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { addCode, clearData } from "../../src/redux/data/dataSlice";
