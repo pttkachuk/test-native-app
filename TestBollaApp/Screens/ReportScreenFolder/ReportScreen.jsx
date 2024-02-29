@@ -36,6 +36,8 @@ const ReportScreen = () => {
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
 
+  //console.log("foto fatta:", image);
+
   //===============================================
   const onChangeValue = (value) => {
     dispatch(addCode(value));
@@ -121,7 +123,7 @@ const ReportScreen = () => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
           />
-          {!image || !code ? (
+          {!image && !code ? (
             <View style={styles.exitBtnWrap}>
               <Text style={styles.alertText}>
                 prima aggiungi tutti i dati e dopo potrai inviarli
