@@ -1,7 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import UploadModal from "../src/components/UploadModalFolder/UploadModal";
+//import UploadModal from "../src/components/UploadModalFolder/UploadModal";
+const UploadModal = React.lazy(() =>
+  import("../src/components/UploadModalFolder/UploadModal")
+);
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModalVisible } from "../src/redux/modal/modalSlice";
 import { selectUserName } from "../src/redux/auth/authSelector";
