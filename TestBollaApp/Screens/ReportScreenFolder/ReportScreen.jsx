@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import * as MailComposer from "expo-mail-composer";
 import {
   Alert,
@@ -14,7 +14,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-//import UploadModal from "../../src/components/UploadModalFolder/UploadModal";
 const UploadModal = React.lazy(() =>
   import("../../src/components/UploadModalFolder/UploadModal")
 );
@@ -32,14 +31,15 @@ const ReportScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const route = useRoute();
+  //console.log("report screen route:", route.name);
+
   const [isFocused, setIsFocused] = useState(false);
 
   const image = useSelector(selectImage);
   const code = useSelector(selectCode);
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
-
-  //console.log("foto fatta:", image);
 
   //===============================================
   const onChangeValue = (value) => {
