@@ -1,12 +1,21 @@
-import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import ReportScreen from "./ReportScreenFolder/ReportScreen";
-import InitialScreen from "./InitialScreen";
 import { useDispatch } from "react-redux";
-import ExitModal from "../src/components/ExitModalFolder/ExitModal";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import { toggleExitModal } from "../src/redux/exitModal/exitModalSlice";
+
+const ReportScreen = React.lazy(() =>
+  import("./ReportScreenFolder/ReportScreen")
+);
+const InitialScreen = React.lazy(() => import("./InitialScreen"));
+const ExitModal = React.lazy(() =>
+  import("../src/components/ExitModalFolder/ExitModal")
+);
+
+//import ReportScreen from "./ReportScreenFolder/ReportScreen";
+//import InitialScreen from "./InitialScreen";
+//import ExitModal from "../src/components/ExitModalFolder/ExitModal";
 
 const Tabs = createBottomTabNavigator();
 
