@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { toggleExitModal } from "../src/redux/exitModal/exitModalSlice";
+import { useRoute } from "@react-navigation/native";
 
 const ReportScreen = React.lazy(() =>
   import("./ReportScreenFolder/ReportScreen")
@@ -13,13 +14,12 @@ const ExitModal = React.lazy(() =>
   import("../src/components/ExitModalFolder/ExitModal")
 );
 
-//import ReportScreen from "./ReportScreenFolder/ReportScreen";
-//import InitialScreen from "./InitialScreen";
-//import ExitModal from "../src/components/ExitModalFolder/ExitModal";
-
 const Tabs = createBottomTabNavigator();
 
 const HomeScreen = () => {
+  const route = useRoute();
+  //console.log("HOME screen route:", route.name);
+
   const dispatch = useDispatch();
 
   const toggleModal = () => {
