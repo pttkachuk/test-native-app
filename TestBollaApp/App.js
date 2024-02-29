@@ -10,8 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/redux/store';
 
 import HomeScreen from './Screens/HomeScreen';
-import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
-import InitialScreen from './Screens/InitialScreen';
+//import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
+//import InitialScreen from './Screens/InitialScreen';
 import LoginScreen from './Screens/LoginScreenFolder/LoginScreen';
 
 
