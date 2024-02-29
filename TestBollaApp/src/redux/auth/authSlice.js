@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUserThunk, logoutUserThunk } from "./authThunk";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const initialState = {
     user: { login: null, name: null, email: null },
@@ -42,6 +43,9 @@ export const authSlice = createSlice({
                 state.user = { login: null, name: null, email: null };
                 state.userToken = null;
                 console.log('token after logout:', state.userToken);
+                AsyncStorage.removeItem('userToken')
+                    .then(() => console.log('Token rimosso correttamente'))
+                    .catch((error) => console.error('Errore durante la rimozione del token:', error));
             })
             .addCase(logoutUserThunk.rejected, (state, action) => {
                 state.isLoading = false;
