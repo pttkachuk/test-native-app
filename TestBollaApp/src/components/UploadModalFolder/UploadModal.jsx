@@ -20,7 +20,7 @@ const UploadModal = () => {
   const modalVisible = useSelector(selectModalVisible);
   const isFocused = useIsFocused();
   const route = useRoute();
-  //console.log("route be like:", route.name);
+  //console.log(route);
 
   const requestCloseFunc = () => {
     console.log("Modal has been closed");
