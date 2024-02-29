@@ -32,6 +32,7 @@ const LoginScreen = () => {
   const [userPasswordFocused, setUserPasswordFocused] = useState(false);
 
   const isAuth = useSelector(selectUserToken);
+  //const isAuth = null;
 
   const [userLogin, setUserLogin] = useState("");
   const [userPassword, setUserPassword] = useState("");
