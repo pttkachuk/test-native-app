@@ -1,16 +1,25 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
-import HomeScreen from './Screens/HomeScreen';
-import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
-import InitialScreen from './Screens/InitialScreen';
-import LoginScreen from './Screens/LoginScreenFolder/LoginScreen';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './src/redux/store';
+import { ActivityIndicator } from 'react-native';
+
+//const HomeScreen = React.lazy(() => import('./Screens/HomeScreen'));
+//const ReportScreen = React.lazy(() => import('./Screens/ReportScreenFolder/ReportScreen'));
+//const InitialScreen = React.lazy(() => import('./Screens/InitialScreen'));
+//const LoginScreen = React.lazy(() => import('./Screens/LoginScreenFolder/LoginScreen'));
+
+import HomeScreen from './Screens/HomeScreen';
+import ReportScreen from './Screens/ReportScreenFolder/ReportScreen';
+import InitialScreen from './Screens/InitialScreen';
+import LoginScreen from './Screens/LoginScreenFolder/LoginScreen';
+
 
 const MainStack = createStackNavigator();
 
@@ -24,6 +33,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   };
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
