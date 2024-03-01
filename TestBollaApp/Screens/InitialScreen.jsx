@@ -7,13 +7,9 @@ const UploadModal = React.lazy(() =>
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModalVisible } from "../src/redux/modal/modalSlice";
 import { selectUserName } from "../src/redux/auth/authSelector";
-import { useRoute } from "@react-navigation/native";
 
 const InitialScreen = () => {
   const dispatch = useDispatch();
-
-  const route = useRoute();
-  //console.log("initital screen route:", route.name);
 
   const toggleModal = () => {
     dispatch(toggleModalVisible());
