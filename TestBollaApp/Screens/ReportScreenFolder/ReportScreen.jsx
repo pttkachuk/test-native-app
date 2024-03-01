@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import * as MailComposer from "expo-mail-composer";
 import {
   Alert,
@@ -30,9 +30,6 @@ import {
 const ReportScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
-  const route = useRoute();
-  //console.log("report screen route:", route.name);
 
   const [isFocused, setIsFocused] = useState(false);
 
