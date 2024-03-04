@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserToken } from "../../src/redux/auth/authSelector";
 import { useNavigation } from "@react-navigation/native";
 
+import { Feather } from "@expo/vector-icons";
+
 import techneLogo from "../../src/images/techno-login-bottom.png";
 import techneNarrow from "../../src/images/techne-logo-narrow.png";
 import { loginUserThunk } from "../../src/redux/auth/authThunk";
@@ -141,32 +143,39 @@ const LoginScreen = () => {
               onFocus={() => handleFocus("userLogin")}
               onBlur={() => handleBlur("userLogin")}
             />
-            <TextInput
-              style={[
-                styles.input,
-                {
-                  borderWidth: 1,
-                  borderColor: userPasswordFocused ? "#073C85" : "#D3D3D3",
-                },
-              ]}
-              placeholder="Password"
-              value={userPassword}
-              autoComplete="password"
-              textContentType="password"
-              secureTextEntry={hidePassword}
-              onChangeText={(text) => setUserPassword(text)}
-              onFocus={() => handleFocus("password")}
-              onBlur={() => handleBlur("password")}
-            />
+            <View>
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    borderWidth: 1,
+                    borderColor: userPasswordFocused ? "#073C85" : "#D3D3D3",
+                  },
+                ]}
+                placeholder="Password"
+                value={userPassword}
+                autoComplete="password"
+                textContentType="password"
+                secureTextEntry={hidePassword}
+                onChangeText={(text) => setUserPassword(text)}
+                onFocus={() => handleFocus("password")}
+                onBlur={() => handleBlur("password")}
+              />
+              <TouchableOpacity
+                onPress={togglePassword}
+                style={styles.password}
+              >
+                {hidePassword ? (
+                  <Feather name="eye-off" size={21} color="#D3D3D3" />
+                ) : (
+                  <Feather name="eye" size={21} color="#D3D3D3" />
+                )}
+              </TouchableOpacity>
+            </View>
           </KeyboardAvoidingView>
         </View>
         <TouchableOpacity style={styles.btn} onPress={signInUser}>
           <Text style={styles.btnText}>Entra</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={togglePassword} disabled={!userPassword}>
-          <Text style={styles.password}>
-            {hidePassword ? "Mostra password" : "Nascondi password"}
-          </Text>
         </TouchableOpacity>
         <Image source={techneLogo} style={styles.bottomLogo} />
         {isLoading && <ActivityIndicator size="small" color="#073C85" />}
